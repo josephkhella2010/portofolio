@@ -5,11 +5,13 @@ import ProjectSection from "./childComponent/ProjectSection";
 import ContactSection from "./childComponent/ContactSection";
 import styles from "./home.module.css";
 import Testimonial from "../testimonal/Testimonial";
+import DownloadBtn from "../../components/DownloadBtn";
 
 export default function Home() {
   return (
     <div className={styles.mainWrapperTwo}>
       <AboutUs />
+      <DownloadBtn />
       <SkillSection />
       <ProjectSection />
       <Testimonial />

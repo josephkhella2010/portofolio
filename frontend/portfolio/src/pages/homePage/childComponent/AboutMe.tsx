@@ -120,7 +120,7 @@ export default function AboutUs() {
         <p>{GetText("home/aboutUs/paragraph")}</p>
       </div>
       <div className={styles.AboutUsimgSection}>
-        <img src="https://via.placeholder.com/150" alt="About Us" />
+        <img src="/foto/jo.jpg" alt="About Us" />
       </div>
     </div>
   );

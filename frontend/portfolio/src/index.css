@@ -20,3 +20,40 @@
     color: var(--normalFontColor);
     overflow-x: hidden;
 }
+.downloadBtnContainer{
+    width:100%;
+    display:flex;
+    padding: 0px 2rem 4rem 2rem;
+}
+.downloadBtn{
+    background-color: rgb(36, 80, 102);
+    padding: 15px;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+    border:0px solid transparent;
+    cursor: pointer;
+    font-weight: bold;
+    transition:transform 0.5s linear ;
+    -webkit-transition:transform 0.5s linear ;
+    -moz-transition:transform 0.5s linear ;
+    -ms-transition:transform 0.5s linear ;
+    -o-transition:transform 0.5s linear ;
+}
+.downloadBtn:hover{
+    transform:scale(1.2);
+    -webkit-transform:scale(1.2);
+    -moz-transform:scale(1.2);
+    -ms-transform:scale(1.2);
+    -o-transform:scale(1.2);
+}
+@media (max-width: 768px) {
+    .downloadBtnContainer{
+        width:100%;
+        display:flex;
+        padding: 0px;
+        justify-content: center;
+    }
+}

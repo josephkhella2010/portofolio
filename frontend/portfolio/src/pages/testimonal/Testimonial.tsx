@@ -1,7 +1,6 @@
 import React, { useRef, useState } from "react";
 import styles from "./testimonial.module.css";
-import { FaRegStar, FaStar } from "react-icons/fa6";
-
+import { FaStar } from "react-icons/fa6";
 export default function Testimonial() {
   const testimonialArr = [
     {
