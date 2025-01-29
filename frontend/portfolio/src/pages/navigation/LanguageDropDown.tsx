@@ -101,8 +101,8 @@ export default function LanguageDropDown() {
   }
 
   const langArr: LanguageItem[] = [
-    { url: "/foto/svflag.png", lan: "sv" },
-    { url: "/foto/engFlag.png", lan: "en" }
+    { url: "/foto/sv.jpg", lan: "sv" },
+    { url: "/foto/eng.png", lan: "en" }
   ];
 
   const { language, setLanguage } = useLanguage(); // Use language from context
@@ -116,7 +116,7 @@ export default function LanguageDropDown() {
 
   // Handle language selection
   function handleLang(selectedFlag: LanguageItem) {
-    setLanguage(selectedFlag.lan); // Update language in context
+    setLanguage(selectedFlag.lan);
     setOpen(false); // Close the dropdown
   }
 

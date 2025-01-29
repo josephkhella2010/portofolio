@@ -1,0 +1,124 @@
+.TestimonialWrapper{
+    width:100;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    gap:30px
+}
+.TopContainer{
+    width:50%;
+    text-align: center;
+}
+.TopContainer p{
+    color:gray
+
+}
+.bottomContainer{
+    width:50%;
+    overflow: hidden;  
+}
+.bottomSection{
+width:100%;
+display:flex;
+gap:10px;
+overflow: hidden;  
+border-radius: 10px;
+
+
+}
+.sliderContainer{
+    background-color: rgb(255, 255, 255);
+    padding: 20px;
+    width: 100%;
+    min-width: 100%;
+    margin-bottom: 5px;
+    border-radius: 10px;
+    box-shadow: 3px 3px 5px rgba(255, 255, 255, 0.288);
+    transition: transform 0.5s linear ;
+    -webkit-transition: transform 0.5s linear ;
+    -moz-transition: transform 0.5s linear ;
+    -ms-transition: transform 0.5s linear ;
+    -o-transition: transform 0.5s linear ;
+}
+.SliderTopSection{
+    display:flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+.SliderLeftContent{
+    display:flex;
+gap:10px
+
+}
+.SliderTopSection img{
+    width:50px;
+    height: 50px;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+}
+.titleJob{
+    display:flex;
+    flex-direction: column;
+    gap:10px;
+   
+}
+.titleJob p:nth-of-type(1){
+    color:black;
+    font-size: 20px;
+font-weight: bold;
+}
+.titleJob p:nth-of-type(2),.titleJob p:nth-of-type(2) span{
+    color:rgb(134, 134, 134);
+    font-size: 14px;
+}
+.sliderText{
+    color:rgb(97, 97, 97);
+    font-size: 20px;
+    font-family:Arial, Helvetica, sans-serif; 
+    font-weight: lighter;
+}
+.bulletsContainer{
+    width:50%;
+    height: 30px;
+    display:flex;
+    gap:10px;
+    justify-content: center;
+    align-items: center;
+}
+.bulletsContainer li{
+    list-style: none;
+    width:10px;
+    height: 10px;
+    background-color: white;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+    cursor: pointer;
+}
+.bulletsContainer li.active{
+background-color: rgb(104, 2, 194);
+box-shadow:  0px 0px 5px  rgb(104, 2, 194),
+0px 0px 10px rgb(104, 2, 194),
+0px 0px 15px rgb(104, 2, 194),
+0px 0px 20px rgb(137, 26, 234);
+}
+.starIcon{
+    --normalFontColor: gold;
+}
+@media (max-width: 750px) {
+    .bottomContainer{
+        width:80%;
+    }
+    .sliderText{
+        font-size: 15px;
+    }
+    .titleJob p:nth-of-type(1){
+        font-size: 15px;
+
+    }
+}
