@@ -95,6 +95,7 @@ grid-template-columns: repeat(4,1fr);
     background-color: rgb(3, 140, 168);
     height: 100%;
     width: 100%;
+    max-width: 300px;
     border-radius: 50%;
     -webkit-border-radius: ;
     -moz-border-radius: ;
