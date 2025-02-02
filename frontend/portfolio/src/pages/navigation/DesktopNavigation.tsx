@@ -11,12 +11,14 @@ export default function DesktopNavigation() {
   let project: HTMLElement | null = null;
   let about: HTMLElement | null = null;
   let skill: HTMLElement | null = null;
+  let itSkill: HTMLElement | null = null;
 
   useEffect(() => {
     contact = document.querySelector("#contactMe");
     project = document.querySelector("#project");
     about = document.querySelector("#aboutMe");
     skill = document.querySelector("#skill");
+    itSkill = document.querySelector("#itSkill");
   }, []);
 
   function handleClick(val: string) {
@@ -33,6 +35,9 @@ export default function DesktopNavigation() {
 
     if (about && val === "about") {
       about.scrollIntoView({ behavior: "smooth" });
+    }
+    if (itSkill && val === "itSkill") {
+      itSkill.scrollIntoView({ behavior: "smooth" });
     }
   }
 
@@ -55,6 +60,9 @@ export default function DesktopNavigation() {
         </li>
         <li className={styles.link} onClick={() => handleClick("about")}>
           {GetText("nav/linkFour")}
+        </li>
+        <li className={styles.link} onClick={() => handleClick("itSkill")}>
+          kunskaper
         </li>
       </ul>
     </nav>

@@ -7,10 +7,10 @@ import WebExperienceSection from "./WebExperienceSection";
 export default function FrontendSkillSection() {
   const [showList, setShowList] = useState<boolean>(false);
   return (
-    <div className={styles.mainContainer}>
+    <div className={styles.mainContainer} id="itSkill">
       <div className={styles.header}>
-        <h1>Skill</h1>
-        <p>My technical level</p>
+        <h1>IT-kunskaper</h1>
+        <p>Min tekniska kompetensnivå </p>
       </div>
       <div
         className={styles.skillSection}

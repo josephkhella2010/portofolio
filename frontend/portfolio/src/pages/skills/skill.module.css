@@ -1,17 +1,24 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Bungee+Tint&family=Dancing+Script:wght@400..700&family=Edu+AU+VIC+WA+NT+Pre:wght@400..700&family=Figtree:ital,wght@0,300..900;1,300..900&family=Geist:wght@100..900&family=Inconsolata:wght@200..900&family=Inter:wght@100..900&family=New+Amsterdam&family=Rye&family=Shrikhand&family=Spicy+Rice&display=swap');
 .mainContainer{
 /*     background-color: red;
  */
  display: flex;
  flex-direction: column;
  gap:50px;
- padding: 2rem;
+ padding: 5rem 2rem;
 }
 .header{
-/*     background-color: aqua;
- */    display:flex;
+   display:flex;
     flex-direction: column;
     gap:10px;
     align-items: center;
+    font-family: "Geist", serif;
+    font-optical-sizing: auto;
+    font-weight: 600;
+    font-style: normal; font-size: 30px;
+    padding: 2rem 0rem;
+    
 }
 .skillSection{
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
@@ -147,10 +154,17 @@ grid-template-columns: repeat(4,1fr);
     .listMenu{
         width:100%;
     }
+    .header{  
+        font-size: 22px; 
+     }
 
 }
 
-
+@media (max-width: 500px) {
+    .mainContainer {
+        padding: 3rem 2rem;
+    }
+}
 @media (max-width: 450px) {
     .skillSection{
         width:100%;

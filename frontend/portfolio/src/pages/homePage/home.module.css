@@ -59,10 +59,10 @@
 
 .skillWrapper {
     width: 100%;
-    padding: 2rem;
     display: flex;
     flex-direction: column;
     min-height: 500px;
+    padding: 5rem 2rem;
 }
 
 .skillFirstSection ul {
@@ -317,8 +317,7 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    padding: 2rem;
-    margin-bottom: 5rem;
+    padding: 5rem 2rem;
 }
 
 .contactSection {
@@ -517,6 +516,7 @@ form button:hover{
         gap: 40px;
         width: 95%;
         padding: 3rem 0px;
+        margin-top: 60px;
     }
     .AboutUsText h1,
     .AboutUsText h2 {
@@ -593,6 +593,22 @@ form button:hover{
     .cardContent {
         width: 100%
     }
+    
+.skillWrapper {
+   width:90%;
+    padding: 4rem 0rem 3rem 0rem;
+}
+.contactContainer {
+
+    padding: 3rem 0rem;
+}
+form {
+    width: 90%;
+}
+.projectContainer{
+   
+    padding: 3rem 10px;
+}
   
 }
 

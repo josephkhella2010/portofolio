@@ -269,3 +269,12 @@
     background-color: #4a3663;
     ;
 }
+@media (max-width: 850px) {
+
+    .navBar ul {
+      
+        width: 78%;
+       
+    }
+   
+   }

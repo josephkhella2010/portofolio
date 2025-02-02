@@ -105,7 +105,7 @@ export default function WebExperienceSection() {
         }
       }
       setProgressVal(upgradeValue);
-    }, 1);
+    }, 10);
 
     return () => clearInterval(interval);
   }, [progressVal, webSkill]);

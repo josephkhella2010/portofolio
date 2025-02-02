@@ -14,9 +14,14 @@ export default function MobileNavigation() {
   const project = document.querySelector("#project");
   const about = document.querySelector("#aboutMe");
   const skill = document.querySelector("#skill");
+  const itSkill = document.querySelector("#itSkill");
+
   function handleClick(val: string) {
     if (skill && val === "experience") {
       skill.scrollIntoView({ behavior: "smooth" });
+    }
+    if (itSkill && val === "itSkill") {
+      itSkill.scrollIntoView({ behavior: "smooth" });
     }
     if (contact && val === "contact") {
       contact.scrollIntoView({ behavior: "smooth" });
@@ -43,8 +48,7 @@ export default function MobileNavigation() {
         <LanguageDropDown />
         <div
           className={`${styles.hamburger} ${addClassActive}`}
-          onClick={() => setIsOpen(!isOpen)}
-        >
+          onClick={() => setIsOpen(!isOpen)}>
           <div></div>
           <div></div>
           <div></div>
@@ -62,6 +66,9 @@ export default function MobileNavigation() {
         </li>
         <li className={styles.link} onClick={() => handleClick("about")}>
           {GetText("nav/linkFour")}
+        </li>
+        <li className={styles.link} onClick={() => handleClick("itSkill")}>
+          kunskaper
         </li>
       </ul>
     </nav>
