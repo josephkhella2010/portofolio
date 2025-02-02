@@ -6,6 +6,7 @@ import ContactSection from "./childComponent/ContactSection";
 import styles from "./home.module.css";
 import Testimonial from "../testimonal/Testimonial";
 import DownloadBtn from "../../components/DownloadBtn";
+import FrontendSkillSection from "../skills/FrontendSkillSection";
 
 export default function Home() {
   return (
@@ -13,6 +14,7 @@ export default function Home() {
       <AboutUs />
       <DownloadBtn />
       <SkillSection />
+      <FrontendSkillSection />
       <ProjectSection />
       <Testimonial />
       <ContactSection />

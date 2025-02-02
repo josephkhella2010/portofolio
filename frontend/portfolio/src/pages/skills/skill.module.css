@@ -1,0 +1,86 @@
+.mainContainer{
+/*     background-color: red;
+ */
+ display: flex;
+ flex-direction: column;
+ gap:50px;
+ padding: 2rem;
+}
+.header{
+/*     background-color: aqua;
+ */    display:flex;
+    flex-direction: column;
+    gap:10px;
+    align-items: center;
+}
+.skillSection{
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+/*     background-color: chartreuse;
+ */    display:flex;
+    gap:15px;
+    align-items: center;
+    padding: 10px;
+    width:400px;
+    justify-content: space-between;
+    border:0.5px solid rgb(255, 255, 255);
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+}
+.leftSection{
+    display:flex;
+    gap:15px;
+}
+.iconContainer{
+/*     background-color: crimson;
+ */    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap:10px;
+    font-size: 24px;
+}
+.arrowIcon{
+       font-size: 40px;
+}
+.listMenu{
+    width:50%;
+    min-height: 300px;
+    background-color: burlywood;
+}
+@media (max-width: 450px) {
+    .skillSection{
+        width:100%;
+    }
+    .textContent{
+
+    }
+    .textContent h2{
+        font-size: 16px;
+    }
+    .textContent p{
+        font-size: 10px;
+    }
+    .iconContainer{
+      gap:5px;
+    font-size: 16px;
+        }
+    .arrowIcon{
+        font-size: 20px;
+ }
+    .listMenu{
+        width:100%;
+    }
+}
+@media (max-width: 350px) {
+
+    .iconContainer{
+      gap:2px;
+    font-size: 14px;
+        }
+    .arrowIcon{
+        font-size: 16px;
+ }
+
+}
