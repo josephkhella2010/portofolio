@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import styles from "./skill.module.css";
 import { FaGreaterThan, FaLessThan } from "react-icons/fa6";
-import { RiArrowDownSLine } from "react-icons/ri";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
+import WebExperienceSection from "./WebExperienceSection";
 
 export default function FrontendSkillSection() {
   const [showList, setShowList] = useState<boolean>(false);
@@ -31,7 +31,11 @@ export default function FrontendSkillSection() {
           <IoIosArrowDown className={styles.arrowIcon} />
         )}
       </div>
-      {showList && <div className={styles.listMenu}></div>}
+      {showList && (
+        <div className={styles.listMenu}>
+          <WebExperienceSection />
+        </div>
+      )}
     </div>
   );
 }
