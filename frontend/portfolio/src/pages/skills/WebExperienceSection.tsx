@@ -93,7 +93,6 @@ export default function WebExperienceSection() {
     Array(webSkill.length).fill(0)
   );
 
-  console.log(progressVal);
   useEffect(() => {
     const interval = setTimeout(() => {
       const upgradeValue = [...progressVal];
@@ -106,7 +105,7 @@ export default function WebExperienceSection() {
         }
       }
       setProgressVal(upgradeValue);
-    }, 10);
+    }, 1);
 
     return () => clearInterval(interval);
   }, [progressVal, webSkill]);
@@ -118,7 +117,7 @@ export default function WebExperienceSection() {
           <div
             className={styles.progress}
             style={{
-              background: `conic-gradient(rgb(44 69 85) ${
+              background: `conic-gradient(rgb(67 54 84) ${
                 (progressVal[index] * 360) / 100
               }deg,rgb(101 102 103 / 94%) ${
                 (progressVal[index] * 360) / 100
