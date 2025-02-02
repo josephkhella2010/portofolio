@@ -45,57 +45,31 @@
        font-size: 40px;
 }
 .listMenu{
-    width:50%;
-    min-height: 300px;
-    background-color: burlywood;
-}
-@media (max-width: 450px) {
-    .skillSection{
-        width:100%;
-    }
-    .textContent{
-
-    }
-    .textContent h2{
-        font-size: 16px;
-    }
-    .textContent p{
-        font-size: 10px;
-    }
-    .iconContainer{
-      gap:5px;
-    font-size: 16px;
-        }
-    .arrowIcon{
-        font-size: 20px;
- }
-    .listMenu{
-        width:100%;
-    }
-}
-@media (max-width: 350px) {
-
-    .iconContainer{
-      gap:2px;
-    font-size: 14px;
-        }
-    .arrowIcon{
-        font-size: 16px;
- }
+    width:90%;
+    margin:auto auto;
+    display:flex;
+    justify-content: center;
+    background: rgba(235, 235, 235, 0.265);; 
+  backdrop-filter: blur(10px); 
+  border-radius: 15px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+  padding: 10px;
 
 }
 
 .progressWrapper {
     display: flex;
-    justify-content: center;
-    align-items: center;
     flex-wrap: wrap;
-    gap: 10px
+    gap: 20px;
+    width:100%;
+/*     background-color: chocolate;
+ */display:grid;
+grid-template-columns: repeat(4,1fr);
+
 }
 
 .circle {
-    width: 100px;
-    height: 100px;
+    height: 250px;
     border-radius: 8px;
     position: relative;
     display: flex;
@@ -105,13 +79,14 @@
     -moz-border-radius: ;
     -ms-border-radius: ;
     -o-border-radius: ;
-}
+/*     background-color: brown;
+ */}
 
 .progress {
     position: relative;
     background-color: rgb(3, 140, 168);
-    height: 100px;
-    width: 100px;
+    height: 100%;
+    width: 100%;
     border-radius: 50%;
     -webkit-border-radius: ;
     -moz-border-radius: ;
@@ -129,17 +104,24 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    gap:10px
 }
 
 .valueContainer p {
     font-size: 14px;
+}
+.valueContainer p:nth-of-type(1) {
+    font-size: 22px;
+}
+.valueContainer p:nth-of-type(2) {
+    font-size: 18px;
 }
 
 .progress::before {
     content: "";
     width: 80%;
     height: 80%;
-    background-color: rgb(75, 0, 172);
+    background-color: rgb(114, 114, 114);
     border-radius: 50%;
     position: absolute;
     -webkit-border-radius: ;
@@ -147,4 +129,68 @@
     -ms-border-radius: ;
     -o-border-radius: ;
 }
+@media (max-width: 950px) {
+ .progressWrapper {
+    grid-template-columns: repeat(3,1fr);
+    width:100%;
+   
+    }
 
+}
+@media (max-width: 650px) {
+
+ .progressWrapper {
+    grid-template-columns: repeat(2,1fr);
+    gap:15px
+    }
+    .listMenu{
+        width:100%;
+    }
+
+}
+
+
+@media (max-width: 450px) {
+    .skillSection{
+        width:100%;
+    }
+   
+    .textContent h2{
+        font-size: 16px;
+    }
+    .textContent p{
+        font-size: 10px;
+    }
+    .iconContainer{
+      gap:5px;
+    font-size: 16px;
+        }
+    .arrowIcon{
+        font-size: 20px;
+ }
+ .progressWrapper {
+    grid-template-columns: repeat(1,1fr);
+    gap:30px
+    
+    }
+    .progress {
+        width:80%;
+        height: 250px;
+    }
+    .circle {
+        height: 250px;
+    }
+
+
+}
+@media (max-width: 350px) {
+
+    .iconContainer{
+      gap:2px;
+    font-size: 14px;
+        }
+    .arrowIcon{
+        font-size: 16px;
+ }
+
+}
