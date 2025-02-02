@@ -325,35 +325,52 @@
     display: flex;
     justify-content: center;
     flex-direction: column;
-    gap: 20px;
+    gap: 50px;
     width:100%
 }
 .contactSectionHeader{
-    background-color: rgb(255, 0, 136);
-    text-align: center;
+/*     background-color: rgb(255, 0, 136);
+ */    text-align: center;
 }
 .contactSectionSecondContent{
-    background-color:brown;
-    width:100%;
+/*     background-color:brown;
+ */    width:100%;
     display:flex;
     flex-direction: column;
-    gap:30px;
+    gap:50px;
 }
 .SecondContentInnerSection{
     display:flex;
-    background-color: chartreuse;  
-        justify-content: center; 
+/*     background-color: chartreuse;  
+ */        justify-content: center; 
         gap:100px;   
 }
 form{
-    background-color: aqua;
-    display:flex;
+/*     background-color: aqua;
+ */    display:flex;
     flex-direction: column;
     gap:10px;
 }
+.handIcon{
+    --normalFontColor: gold;
+    font-size:20px
+}
+.formHeader{
+    display:flex;
+    align-items: center;
+    gap:10px;
+    margin-bottom:5px;
+}
+
+form label{
+    display: flex;
+    flex-direction: column;
+    gap:10px
+}   
+
 form label input,form label textarea{
     width: 400px;
-    height: 50px;
+    height: 30px;
     outline: none;
     border:1px solid black;
     border-radius: 5px;
@@ -363,12 +380,39 @@ form label input,form label textarea{
     -o-border-radius: 5px;
     color:black
 }
+form label:nth-of-type(3){
+    margin-bottom: 10px;
+/*     background-color: rgb(4, 76, 20);
+ */}
 form label textarea{
-height: 150px;
+    height: 150px;
+    resize: none;
+    outline: none;          
+    border: none;           
+    background-color: transparent; 
+}
+form label textarea::-webkit-scrollbar {
+    display: none; 
+}
+.textareaContainer{
+     background-color:white;
+     border-radius: 5px;
+     padding: 5px;
+      -webkit-border-radius: 5px;
+       -moz-border-radius: 5px;
+        -ms-border-radius: 5px;
+         -o-border-radius: 5px;
+}
+.totalLetter{
+    display:flex;
+    justify-content: flex-end;
+    color:gray;
+    font-size: 13px;
+    
 }
 form button{
     display:flex;
-    background-color: cornflowerblue;
+    background-color: rgb(16 66 94 / 84%);
     justify-content: center;
     align-items: center;
     gap:10px;
@@ -382,11 +426,16 @@ cursor:pointer;
     -ms-border-radius: 5px;
     -o-border-radius: 5px;
 }
+form button:hover{
+    background-color: rgb(30 91 126 / 84%);; 
+}
 .contactSection ul {
     display: flex;
 /*     justify-content: center;
  */    flex-direction: column;
-    gap: 20px
+    gap: 20px;
+    position: relative;
+    top:42px
 }
 
 .contactSection ul li {
@@ -499,17 +548,26 @@ cursor:pointer;
         width:85%;
       
     }
+    .formHeader{
+       justify-content: center;
+    }
+    
      form label input,form label textarea{
         width:100%;
         max-width: 100%;
-        height: 50px;
+        height: 30px;
     }
     form label textarea{
         height: 150px;
     }
+   
     form button{
         height: 50px;
       
+    }
+    .contactSection ul {
+        position: relative;
+        top:0px
     }
 }
 

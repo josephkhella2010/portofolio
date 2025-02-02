@@ -1,48 +1,57 @@
-import React, { FormEvent, useState } from "react";
+import React, { FormEvent, useRef, useState } from "react";
+import emailjs from "@emailjs/browser";
 import styles from "../home.module.css";
 import { MdEmail, MdPlace } from "react-icons/md";
 import { BsFillTelephoneFill } from "react-icons/bs";
 import { SlSocialLinkedin } from "react-icons/sl";
 import { FiGithub } from "react-icons/fi";
 import { GetText } from "../../../utils/translationUtils";
-import { BiSend } from "react-icons/bi";
+import { BiSend, BiSolidHandDown } from "react-icons/bi";
+import { FaHandPointDown } from "react-icons/fa6";
 interface SmsType {
   name: string;
   email: string;
-  subject: string;
   text: string;
 }
 export default function ContactSection() {
   const [sms, setSms] = useState<SmsType>({
     name: "",
     email: "",
-    subject: "",
     text: ""
   });
   const [listOfSms, setListOfSms] = useState<SmsType[]>([]);
 
-  function handleForm(e: FormEvent<HTMLFormElement>) {
+  const form = useRef<HTMLFormElement | null>(null);
+
+  const sendEmail = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!sms.name || !sms.email || !sms.subject || !sms.text) {
-      alert("please fill all field");
-    } else {
-      const newText = {
-        name: sms.name,
-        email: sms.email,
-        subject: sms.subject,
-        text: sms.text
-      };
-      const Copy = [...listOfSms, newText];
-      setListOfSms(Copy);
-      setSms({
-        name: "",
-        email: "",
-        subject: "",
-        text: ""
-      });
+
+    if (form.current) {
+      emailjs
+        .sendForm("service_ch7x25p", "template_my5vwlq", form.current, {
+          publicKey: "dEic-Tvd7QooSz20W"
+        })
+
+        .then(
+          () => {
+            const newSms = {
+              name: sms.name,
+              email: sms.email,
+              text: sms.text
+            };
+            setListOfSms((prev) => [...prev, newSms]);
+            console.log("SUCCESS!");
+            setSms({ name: "", email: "", text: "" });
+          },
+          (error) => {
+            console.log("FAILED...", error.text);
+          }
+        );
     }
-  }
-  console.log(listOfSms);
+  };
+  //console.log(listOfSms);
+  console.log(sms.text.length);
+
   return (
     <div className={styles.contactContainer} id="contactMe">
       <div className={styles.contactSection}>
@@ -102,46 +111,51 @@ export default function ContactSection() {
                 </p>
               </li>
             </ul>
-            <form onSubmit={handleForm}>
-              <label htmlFor="">
+
+            <form ref={form} onSubmit={sendEmail}>
+              <div className={styles.formHeader}>
+                <h3>Send a message</h3>
+                <BiSolidHandDown className={styles.handIcon} />
+              </div>
+              <label>
                 <p>Name</p>
                 <input
                   type="text"
+                  name="user_name"
                   value={sms.name}
                   onChange={(e) =>
                     setSms((prev) => ({ ...prev, name: e.target.value }))
                   }
                 />
               </label>
-              <label htmlFor="">
+              <label>
                 <p>Email</p>
+
                 <input
-                  type="text"
+                  type="email"
+                  name="user_email"
                   value={sms.email}
                   onChange={(e) =>
                     setSms((prev) => ({ ...prev, email: e.target.value }))
                   }
                 />
               </label>
-              <label htmlFor="">
-                <p>Subject</p>
-                <input
-                  type="text"
-                  value={sms.subject}
-                  onChange={(e) =>
-                    setSms((prev) => ({ ...prev, subject: e.target.value }))
-                  }
-                />
-              </label>
-              <label htmlFor="">
+              <label>
                 <p>Message</p>
-                <textarea
-                  name=""
-                  id=""
-                  value={sms.text}
-                  onChange={(e) =>
-                    setSms((prev) => ({ ...prev, text: e.target.value }))
-                  }></textarea>
+                <div className={styles.textareaContainer}>
+                  <textarea
+                    name="message"
+                    value={sms.text}
+                    onChange={(e) =>
+                      setSms((prev) => ({ ...prev, text: e.target.value }))
+                    }
+                  />
+                  {sms.text.length > 0 && (
+                    <p className={styles.totalLetter}>
+                      Total letter is {sms.text.length}
+                    </p>
+                  )}
+                </div>
               </label>
               <button type="submit">
                 {" "}
