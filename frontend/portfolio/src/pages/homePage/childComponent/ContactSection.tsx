@@ -57,7 +57,7 @@ export default function ContactSection() {
       <div className={styles.contactSection}>
         <div className={styles.contactSectionHeader}>
           <h1>{GetText("home/contactSection/header")}</h1>
-          <h2>Get in touch </h2>
+          <h2>{GetText("contact/subHeader")}</h2>
         </div>
         <div className={styles.contactSectionSecondContent}>
           <div className={styles.SecondContentInnerSection}>
@@ -114,11 +114,11 @@ export default function ContactSection() {
 
             <form ref={form} onSubmit={sendEmail}>
               <div className={styles.formHeader}>
-                <h3>Send a message</h3>
+                <h3>{GetText("contact/sendHeader")}</h3>
                 <BiSolidHandDown className={styles.handIcon} />
               </div>
               <label>
-                <p>Name</p>
+                <p>{GetText("contact/name")}</p>
                 <input
                   type="text"
                   name="user_name"
@@ -129,7 +129,7 @@ export default function ContactSection() {
                 />
               </label>
               <label>
-                <p>Email</p>
+                <p>{GetText("contact/Email")}</p>
 
                 <input
                   type="email"
@@ -141,7 +141,7 @@ export default function ContactSection() {
                 />
               </label>
               <label>
-                <p>Message</p>
+                <p>{GetText("contact/Message")}</p>
                 <div className={styles.textareaContainer}>
                   <textarea
                     name="message"
@@ -152,14 +152,14 @@ export default function ContactSection() {
                   />
                   {sms.text.length > 0 && (
                     <p className={styles.totalLetter}>
-                      Total letter is {sms.text.length}
+                      {GetText("contact/TotalLetter")} {sms.text.length}
                     </p>
                   )}
                 </div>
               </label>
               <button type="submit">
                 {" "}
-                <p>Send Message</p> <BiSend />
+                <p>{GetText("contact/SendMessageBtn")}</p> <BiSend />
               </button>
             </form>
           </div>

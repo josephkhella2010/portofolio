@@ -3,7 +3,7 @@ import styles from "../home.module.css";
 import { GetText } from "../../../utils/translationUtils";
 
 export default function SkillSection() {
-  interface WebSkillType {
+  /*  interface WebSkillType {
     name: string;
     scale: number;
   }
@@ -39,11 +39,13 @@ export default function SkillSection() {
 
     return () => clearInterval(interval);
   }, [progressValue, webSkill]);
+*/
+  const [skills, setSkills] = useState<string>("skill");
 
   function handleSkill(val: string) {
-    if (val === "skill") {
+    /*  if (val === "skill") {
       setProgressValue([0, 0, 0]);
-    }
+    } */
     setSkills(val);
   }
 
@@ -81,7 +83,7 @@ export default function SkillSection() {
             <p>VSCode, Git/GitHub, Figma,Trello</p>
           </div>
 
-          <div className={styles.progressWrapper}>
+          {/*   <div className={styles.progressWrapper}>
             {webSkill.map((item, index) => (
               <div key={index} className={styles.circle}>
                 <div
@@ -101,7 +103,7 @@ export default function SkillSection() {
                 </div>
               </div>
             ))}
-          </div>
+          </div> */}
         </div>
       )}
 
