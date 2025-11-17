@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import styles from "./skill.module.css";
 import { FaGreaterThan, FaLessThan } from "react-icons/fa6";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
@@ -15,7 +15,8 @@ export default function FrontendSkillSection() {
       </div>
       <div
         className={styles.skillSection}
-        onClick={() => setShowList(!showList)}>
+        onClick={() => setShowList(!showList)}
+      >
         <div className={styles.leftSection}>
           <div className={styles.iconContainer}>
             <FaLessThan />

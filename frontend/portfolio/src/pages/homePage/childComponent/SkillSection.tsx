@@ -1,51 +1,11 @@
-import React, { useEffect, useState } from "react";
+import { useState } from "react";
 import styles from "../home.module.css";
 import { GetText } from "../../../utils/translationUtils";
 
 export default function SkillSection() {
-  /*  interface WebSkillType {
-    name: string;
-    scale: number;
-  }
-
-  const [skills, setSkills] = useState<string>("skill");
-
-  const webSkill: WebSkillType[] = [
-    { name: "HTML", scale: 100 },
-    { name: "CSS", scale: 95 },
-    { name: "JS", scale: 90 }
-  ];
-
-  const [progressValue, setProgressValue] = useState<number[]>([0, 0, 0]);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      let updatedProgress = [...progressValue];
-      for (let i = 0; i < webSkill.length; i++) {
-        if (updatedProgress[i] < webSkill[i].scale) {
-          updatedProgress[i] += 1;
-        }
-      }
-      setProgressValue(updatedProgress);
-
-      if (
-        updatedProgress.every(
-          (progress, index) => progress >= webSkill[index].scale
-        )
-      ) {
-        clearInterval(interval);
-      }
-    }, 10);
-
-    return () => clearInterval(interval);
-  }, [progressValue, webSkill]);
-*/
   const [skills, setSkills] = useState<string>("skill");
 
   function handleSkill(val: string) {
-    /*  if (val === "skill") {
-      setProgressValue([0, 0, 0]);
-    } */
     setSkills(val);
   }
 
@@ -82,28 +42,6 @@ export default function SkillSection() {
             <h3>{GetText("home/skillSection/headerFive")}</h3>
             <p>VSCode, Git/GitHub, Figma,Trello</p>
           </div>
-
-          {/*   <div className={styles.progressWrapper}>
-            {webSkill.map((item, index) => (
-              <div key={index} className={styles.circle}>
-                <div
-                  className={styles.progress}
-                  style={{
-                    background: `conic-gradient(rgba(103, 5, 178, 0.94) ${
-                      (progressValue[index] * 360) / 100
-                    }deg, rgb(51, 8, 88) ${
-                      (progressValue[index] * 360) / 100
-                    }deg)`
-                  }}
-                >
-                  <div className={styles.valueContainer}>
-                    <p>{item.name}</p>
-                    <p>{progressValue[index]}%</p>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div> */}
         </div>
       )}
 
@@ -123,6 +61,9 @@ export default function SkillSection() {
 
       {skills === "experience" && (
         <div className={styles.skillContent}>
+          <h3>2025- {GetText("home/skillSection/headerSix")}</h3>
+          <p>{GetText("home/skillSection/paragraphFreelancer")}</p>
+
           <h3>2023- {GetText("home/skillSection/headerSix")}</h3>
           <p>{GetText("home/skillSection/paragraphSeven")}</p>
           <h3>2022-2023</h3>

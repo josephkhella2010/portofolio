@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import styles from "./navigation.module.css";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { GetText } from "../../utils/translationUtils";
 import LanguageDropDown from "./LanguageDropDown";
 
@@ -48,7 +48,8 @@ export default function MobileNavigation() {
         <LanguageDropDown />
         <div
           className={`${styles.hamburger} ${addClassActive}`}
-          onClick={() => setIsOpen(!isOpen)}>
+          onClick={() => setIsOpen(!isOpen)}
+        >
           <div></div>
           <div></div>
           <div></div>

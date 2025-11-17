@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import { useRef, useState } from "react";
 import styles from "./testimonial.module.css";
 import { FaStar } from "react-icons/fa6";
 import { GetText } from "../../utils/translationUtils";
@@ -10,7 +10,7 @@ export default function Testimonial() {
       place: "Klimra",
       jobTitle: "CEO",
       text: GetText("testimonial/firstParagraph"),
-      stars: 5
+      stars: 5,
     },
     {
       url: "/foto/sameh.jpg",
@@ -18,7 +18,7 @@ export default function Testimonial() {
       place: "MTR",
       jobTitle: GetText("testimonial/secondTitle"),
       text: GetText("testimonial/secondParagraph"),
-      stars: 5
+      stars: 5,
     },
     {
       url: "/foto/jerom.jpg",
@@ -26,7 +26,7 @@ export default function Testimonial() {
       place: "Humanitas Sjukhus",
       jobTitle: "TeamLeader",
       text: GetText("testimonial/thirdParagraph"),
-      stars: 5
+      stars: 5,
     },
     {
       url: "/foto/maria.jpg",
@@ -34,8 +34,8 @@ export default function Testimonial() {
       place: "Coop",
       jobTitle: GetText("testimonial/fourTitle"),
       text: GetText("testimonial/fourParagraph"),
-      stars: 5
-    }
+      stars: 5,
+    },
   ];
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   console.log(currentIndex);
@@ -61,8 +61,9 @@ export default function Testimonial() {
                   style={{
                     transform: `translateX(calc(-${currentIndex * 100}% - ${
                       currentIndex * 10
-                    }px))`
-                  }}>
+                    }px))`,
+                  }}
+                >
                   <div className={styles.SliderTopSection}>
                     <div className={styles.SliderLeftContent}>
                       <img src={item.url} alt="" />
@@ -93,14 +94,13 @@ export default function Testimonial() {
       </div>
       <ul className={styles.bulletsContainer}>
         {testimonialArr &&
-          testimonialArr.map((item, index) => {
+          testimonialArr.map((_, index) => {
             return (
               <li
                 key={index}
                 onClick={() => setCurrentIndex(index)}
-                className={`${
-                  currentIndex === index ? styles.active : ""
-                }`}></li>
+                className={`${currentIndex === index ? styles.active : ""}`}
+              ></li>
             );
           })}
       </ul>

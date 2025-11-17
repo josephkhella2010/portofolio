@@ -1,4 +1,3 @@
-import React from "react";
 import AboutUs from "./childComponent/AboutMe";
 import SkillSection from "./childComponent/SkillSection";
 import ProjectSection from "./childComponent/ProjectSection";

@@ -1,4 +1,4 @@
-import React, { FormEvent, useRef, useState } from "react";
+import { FormEvent, useRef, useState } from "react";
 import emailjs from "@emailjs/browser";
 import styles from "../home.module.css";
 import { MdEmail, MdPlace } from "react-icons/md";
@@ -7,7 +7,6 @@ import { SlSocialLinkedin } from "react-icons/sl";
 import { FiGithub } from "react-icons/fi";
 import { GetText } from "../../../utils/translationUtils";
 import { BiSend, BiSolidHandDown } from "react-icons/bi";
-import { FaHandPointDown } from "react-icons/fa6";
 interface SmsType {
   name: string;
   email: string;
@@ -17,9 +16,9 @@ export default function ContactSection() {
   const [sms, setSms] = useState<SmsType>({
     name: "",
     email: "",
-    text: ""
+    text: "",
   });
-  const [listOfSms, setListOfSms] = useState<SmsType[]>([]);
+  const [_listOfSms, setListOfSms] = useState<SmsType[]>([]);
 
   const form = useRef<HTMLFormElement | null>(null);
 
@@ -29,7 +28,7 @@ export default function ContactSection() {
     if (form.current) {
       emailjs
         .sendForm("service_ch7x25p", "template_my5vwlq", form.current, {
-          publicKey: "dEic-Tvd7QooSz20W"
+          publicKey: "dEic-Tvd7QooSz20W",
         })
 
         .then(
@@ -37,7 +36,7 @@ export default function ContactSection() {
             const newSms = {
               name: sms.name,
               email: sms.email,
-              text: sms.text
+              text: sms.text,
             };
             setListOfSms((prev) => [...prev, newSms]);
             console.log("SUCCESS!");
@@ -74,7 +73,8 @@ export default function ContactSection() {
                   {" "}
                   <a
                     href="mailto:josephkhella2010@gmail.com"
-                    className={styles.contactLink}>
+                    className={styles.contactLink}
+                  >
                     josephkhella2010@gmail.com
                   </a>
                 </p>
@@ -105,7 +105,8 @@ export default function ContactSection() {
                   {" "}
                   <a
                     href="https://www.google.com/search?q=R%C3%A5g%C3%A5ngen+175+46+J%C3%A4rf%C3%A4lla&sca_esv=4d6ae7d55c35ef9b&rlz=1C1CHBD_enSE1106SE1106&sxsrf=ADLYWIKYN96qcVqs6T4Q_q4k-_gu30o2CQ%3A1735156337540&ei=cWJsZ_LXINOPwPAPrcWC-A8&ved=0ahUKEwiy1IOJ2cOKAxXTBxAIHa2iAP8Q4dUDCBA&oq=R%C3%A5g%C3%A5ngen175+46+J%C3%A4rf%C3%A4lla&gs_lp=Egxnd3Mtd2l6LXNlcnAiG1LDpWfDpW5nZW4xNzUgNDYgSsOkcmbDpGxsYTILEAAYsAMYogQYiQUyCxAAGIAEGLADGKIEMgsQABiwAxiiBBiJBTILEAAYsAMYogQYiQUyCxAAGLADGKIEGIkFSPUJUABYAHAAeACQAQCYAVygAVyqAQExuAEMyAEAmAIBoAJkmAMA4gMFEgExIECIBgGQBgWSBwMwLjGgB9wC&sclient=gws-wiz-serp"
-                    className={styles.contactLink}>
+                    className={styles.contactLink}
+                  >
                     Stockholm,Sweden
                   </a>
                 </p>
@@ -169,7 +170,8 @@ export default function ContactSection() {
             </a>
             <a
               href="https://www.linkedin.com/in/joseph-khella-058192251/"
-              target="_blank">
+              target="_blank"
+            >
               <SlSocialLinkedin className={styles.icons} />
             </a>
           </div>
