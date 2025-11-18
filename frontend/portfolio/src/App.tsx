@@ -1,4 +1,3 @@
-import react from "react";
 import RoutePage from "./Routes/RoutePage";
 import { LanguageProvider } from "./context/LanguageContext";
 

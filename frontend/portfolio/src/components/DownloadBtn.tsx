@@ -23,7 +23,6 @@ export default function DownloadBtn() {
   );
 }
  */
-import React from "react";
 import { FaDownload } from "react-icons/fa6";
 
 export default function DownloadBtn() {

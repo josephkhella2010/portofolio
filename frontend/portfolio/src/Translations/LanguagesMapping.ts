@@ -1,7 +1,7 @@
 import HomeTranslations from "./HomeTranslation";
 import ItExperienceTranslations from "./It kunskap translation";
 import contactTranslations from "./KontaktTranslation";
-import NavigationTranslations from "./navigationTranslation";
+import NavigationTranslations from "./NavigationTranslation";
 import TestimonialTranslations from "./TestimonalTranslation";
 
 export const LanguagesMapping: Record<string, { en: string; sv: string }> = {
