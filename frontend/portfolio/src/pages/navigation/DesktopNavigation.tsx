@@ -2,10 +2,11 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./navigation.module.css";
 import LanguageDropDown from "./LanguageDropDown";
-import { GetText } from "../../utils/translationUtils";
+import { useText } from "../../utils/translationUtils";
 
 export default function DesktopNavigation() {
   const navigate = useNavigate();
+  const GetText = useText();
 
   let contact: HTMLElement | null = null;
   let project: HTMLElement | null = null;

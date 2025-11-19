@@ -3,10 +3,12 @@ import styles from "./skill.module.css";
 import { FaGreaterThan, FaLessThan } from "react-icons/fa6";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import WebExperienceSection from "./WebExperienceSection";
-import { GetText } from "../../utils/translationUtils";
+import { useText } from "../../utils/translationUtils";
 
 export default function FrontendSkillSection() {
   const [showList, setShowList] = useState<boolean>(false);
+  const GetText = useText();
+
   return (
     <div className={styles.mainContainer} id="itSkill">
       <div className={styles.header}>

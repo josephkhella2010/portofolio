@@ -1,11 +1,13 @@
 import React, { useEffect, useRef, useState } from "react";
 import styles from "../home.module.css";
 import { FaUpRightFromSquare } from "react-icons/fa6";
-import { GetText } from "../../../utils/translationUtils";
 import { projectArr } from "../../../utils/projectArr";
 import { IoIosArrowDropleft, IoIosArrowDropright } from "react-icons/io";
+import { useText } from "../../../utils/translationUtils";
 
 export default function ProjectSection() {
+  const GetText = useText();
+
   const [currentIndex, setIndex] = useState<number>(0);
   const sliderContainer = useRef<HTMLDivElement>(null);
   const itemRef = useRef<HTMLDivElement>(null);

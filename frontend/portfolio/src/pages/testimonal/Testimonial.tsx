@@ -1,8 +1,10 @@
 import { useRef, useState } from "react";
 import styles from "./testimonial.module.css";
 import { FaStar } from "react-icons/fa6";
-import { GetText } from "../../utils/translationUtils";
+import { useText } from "../../utils/translationUtils";
 export default function Testimonial() {
+  const GetText = useText();
+
   const testimonialArr = [
     {
       url: "/foto/anto.jpg",

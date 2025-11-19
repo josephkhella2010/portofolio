@@ -1,9 +1,10 @@
 import { useState } from "react";
 import styles from "../home.module.css";
-import { GetText } from "../../../utils/translationUtils";
+import { useText } from "../../../utils/translationUtils";
 
 export default function SkillSection() {
   const [skills, setSkills] = useState<string>("skill");
+  const GetText = useText();
 
   function handleSkill(val: string) {
     setSkills(val);

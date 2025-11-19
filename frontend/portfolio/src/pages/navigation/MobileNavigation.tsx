@@ -1,10 +1,12 @@
 import { useState } from "react";
 import styles from "./navigation.module.css";
 import { useNavigate } from "react-router-dom";
-import { GetText } from "../../utils/translationUtils";
 import LanguageDropDown from "./LanguageDropDown";
+import { useText } from "../../utils/translationUtils";
 
 export default function MobileNavigation() {
+  const GetText = useText();
+
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const addClassActive = isOpen ? styles.active : "";

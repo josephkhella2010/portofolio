@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import styles from "../home.module.css";
-import { GetText } from "../../../utils/translationUtils";
 import { useLanguage } from "../../../context/LanguageContext";
+import { useText } from "../../../utils/translationUtils";
 
 export default function AboutUs() {
   const { language } = useLanguage();
@@ -13,6 +13,7 @@ export default function AboutUs() {
   const [displayedText, setDisplayedText] = useState("");
   const [isDeleting, setIsDeleting] = useState(false);
   const [, setLoop] = useState(0);
+  const GetText = useText();
 
   useEffect(() => {
     const currentWord = words[currentWordIndex];
