@@ -1,212 +1,199 @@
-
-@import url('https://fonts.googleapis.com/css2?family=Bungee+Tint&family=Dancing+Script:wght@400..700&family=Edu+AU+VIC+WA+NT+Pre:wght@400..700&family=Figtree:ital,wght@0,300..900;1,300..900&family=Geist:wght@100..900&family=Inconsolata:wght@200..900&family=Inter:wght@100..900&family=New+Amsterdam&family=Rye&family=Shrikhand&family=Spicy+Rice&display=swap');
-.mainContainer{
-/*     background-color: red;
+@import url("https://fonts.googleapis.com/css2?family=Bungee+Tint&family=Dancing+Script:wght@400..700&family=Edu+AU+VIC+WA+NT+Pre:wght@400..700&family=Figtree:ital,wght@0,300..900;1,300..900&family=Geist:wght@100..900&family=Inconsolata:wght@200..900&family=Inter:wght@100..900&family=New+Amsterdam&family=Rye&family=Shrikhand&family=Spicy+Rice&display=swap");
+.mainContainer {
+  /*     background-color: red;
  */
- display: flex;
- flex-direction: column;
- gap:50px;
- padding: 5rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+  padding: 5rem 2rem;
 }
-.header{
-   display:flex;
-    flex-direction: column;
-    gap:10px;
-    align-items: center;
-    font-family: "Geist", serif;
-    font-optical-sizing: auto;
-    font-weight: 600;
-    font-style: normal; font-size: 30px;
-    padding: 2rem 0rem;
-    
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+  font-family: "Geist", serif;
+  font-optical-sizing: auto;
+  font-weight: 600;
+  font-style: normal;
+  font-size: 30px;
+  padding: 2rem 0rem;
 }
-.skillSection{
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-/*     background-color: chartreuse;
- */    display:flex;
-    gap:15px;
-    align-items: center;
-    padding: 10px;
-    width:fit-content;
-    cursor:pointer;
-    justify-content: space-between;
-    border:0.5px solid rgb(255, 255, 255);
-    border-radius: 10px;
-    -webkit-border-radius: 10px;
-    -moz-border-radius: 10px;
-    -ms-border-radius: 10px;
-    -o-border-radius: 10px;
-}
-.leftSection{
-    display:flex;
-    gap:15px;
-}
-.iconContainer{
-/*     background-color: crimson;
- */    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap:10px;
-    font-size: 24px;
-}
-.arrowIcon{
-       font-size: 40px;
-}
-.listMenu{
-    width:90%;
-    margin:auto auto;
-    display:flex;
-    justify-content: center;
-    background: rgba(235, 235, 235, 0.265);; 
-  backdrop-filter: blur(10px); 
-  border-radius: 15px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+.skillSection {
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+  display: flex;
+  gap: 15px;
   padding: 10px;
-
+  width: fit-content;
+  cursor: pointer;
+  justify-content: space-between;
+  border: 0.5px solid rgb(255, 255, 255);
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+}
+.textContent {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.leftSection {
+  display: flex;
+  gap: 15px;
+}
+.iconContainer {
+  /*     background-color: crimson;
+ */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  font-size: 24px;
+}
+.arrowIcon {
+  font-size: 40px;
+}
+.listMenu {
+  width: 90%;
+  margin: auto auto;
+  display: flex;
+  justify-content: center;
+  background: rgba(235, 235, 235, 0.265);
+  backdrop-filter: blur(10px);
+  border-radius: 15px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 10px;
 }
 
 .progressWrapper {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    width:100%;
-/*     background-color: chocolate;
- */display:grid;
-grid-template-columns: repeat(4,1fr);
-
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  width: 100%;
+  /*     background-color: chocolate;
+ */
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
 }
 
 .circle {
-    height: 250px;
-    border-radius: 8px;
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    -webkit-border-radius: ;
-    -moz-border-radius: ;
-    -ms-border-radius: ;
-    -o-border-radius: ;
-/*     background-color: brown;
- */}
+  height: 250px;
+  border-radius: 8px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
 .progress {
-    position: relative;
-    background-color: rgb(3, 140, 168);
-    height: 100%;
-    width: 100%;
-    max-width: 300px;
-    border-radius: 50%;
-    -webkit-border-radius: ;
-    -moz-border-radius: ;
-    -ms-border-radius: ;
-    -o-border-radius: ;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  position: relative;
+  background-color: rgb(3, 140, 168);
+  height: 100%;
+  width: 100%;
+  max-width: 300px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .valueContainer {
-    position: relative;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap:10px
+  position: relative;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
 }
 
 .valueContainer p {
-    font-size: 14px;
+  font-size: 14px;
 }
 .valueContainer p:nth-of-type(1) {
-    font-size: 22px;
+  font-size: 22px;
 }
 .valueContainer p:nth-of-type(2) {
-    font-size: 18px;
+  font-size: 18px;
 }
 
 .progress::before {
-    content: "";
-    width: 80%;
-    height: 80%;
-    background-color: rgb(114, 114, 114);
-    border-radius: 50%;
-    position: absolute;
-    -webkit-border-radius: ;
-    -moz-border-radius: ;
-    -ms-border-radius: ;
-    -o-border-radius: ;
+  content: "";
+  width: 80%;
+  height: 80%;
+  background-color: rgb(114, 114, 114);
+  border-radius: 50%;
+  position: absolute;
 }
-@media (max-width: 950px) {
- .progressWrapper {
-    grid-template-columns: repeat(3,1fr);
-    width:100%;
-   
-    }
 
+@media (max-width: 950px) {
+  .progressWrapper {
+    grid-template-columns: repeat(3, 1fr);
+    width: 100%;
+  }
 }
 @media (max-width: 650px) {
-
- .progressWrapper {
-    grid-template-columns: repeat(2,1fr);
-    gap:15px
-    }
-    .listMenu{
-        width:100%;
-    }
-    .header{  
-        font-size: 22px; 
-     }
-
+  .progressWrapper {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+  }
+  .listMenu {
+    width: 100%;
+  }
+  .header {
+    font-size: 22px;
+  }
 }
-
+@media (max-width: 1100px) {
+  .skillSection {
+    margin: auto auto;
+  }
+}
 @media (max-width: 500px) {
-    .mainContainer {
-        padding: 3rem 2rem;
-    }
+  .mainContainer {
+    padding: 3rem 2rem;
+  }
 }
 @media (max-width: 450px) {
-    .skillSection{
-        width:100%;
-    }
-   
-    .textContent h2{
-        font-size: 16px;
-    }
-    .textContent p{
-        font-size: 10px;
-    }
-    .iconContainer{
-      gap:5px;
+  .skillSection {
+    width: 100%;
+    align-items: center;
+  }
+
+  .textContent h2 {
     font-size: 16px;
-        }
-    .arrowIcon{
-        font-size: 20px;
- }
- .progressWrapper {
-    grid-template-columns: repeat(1,1fr);
-    gap:30px
-    
-    }
-    .progress {
-        width:80%;
-        height: 250px;
-    }
-    .circle {
-        height: 250px;
-    }
-
-
+  }
+  .textContent p {
+    font-size: 10px;
+  }
+  .iconContainer {
+    gap: 5px;
+    font-size: 16px;
+  }
+  .arrowIcon {
+    font-size: 20px;
+  }
+  .progressWrapper {
+    grid-template-columns: repeat(1, 1fr);
+    gap: 30px;
+  }
+  .progress {
+    width: 80%;
+    height: 250px;
+  }
+  .circle {
+    height: 250px;
+  }
 }
 @media (max-width: 350px) {
-
-    .iconContainer{
-      gap:2px;
+  .iconContainer {
+    gap: 2px;
     font-size: 14px;
-        }
-    .arrowIcon{
-        font-size: 16px;
- }
-
+  }
+  .arrowIcon {
+    font-size: 16px;
+  }
 }

@@ -1,59 +1,66 @@
+@import url("https://fonts.googleapis.com/css2?family=Bungee+Tint&family=Dancing+Script:wght@400..700&family=Edu+AU+VIC+WA+NT+Pre:wght@400..700&family=Figtree:ital,wght@0,300..900;1,300..900&family=Geist:wght@100..900&family=Inconsolata:wght@200..900&family=Inter:wght@100..900&family=New+Amsterdam&family=Rye&family=Shrikhand&family=Spicy+Rice&display=swap");
+
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    /*     background-color: var(--bg);
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  /*     background-color: var(--bg);
  */
-    color: var(--normalFontColor)
-    
+  color: var(--normalFontColor);
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
 }
 
 :root {
-    --bg: #1d102d;
-    --normalFontColor: #ffffff;
+  --bg: #1d102deb;
+  --normalFontColor: #ffffff;
 }
 
 .mainWrapper {
-    width: 100%;
-    min-height: 100dvh;
-    background-color: var(--bg);
-    color: var(--normalFontColor);
-    overflow-x: hidden;
+  width: 100%;
+  min-height: 100dvh;
+  color: var(--normalFontColor);
+  overflow-x: hidden;
+  background-image: url("/foto/coding.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
 }
-.downloadBtnContainer{
-    width:100%;
-    display:flex;
-    padding: 0px 2rem 4rem 2rem;
+.downloadBtnContainer {
+  width: 100%;
+  display: flex;
+  padding: 0px 2rem 4rem 2rem;
 }
-.downloadBtn{
-    background-color: rgb(36, 80, 102);
-    padding: 15px;
-    border-radius: 10px;
-    -webkit-border-radius: 10px;
-    -moz-border-radius: 10px;
-    -ms-border-radius: 10px;
-    -o-border-radius: 10px;
-    border:0px solid transparent;
-    cursor: pointer;
-    font-weight: bold;
-    transition:transform 0.5s linear ;
-    -webkit-transition:transform 0.5s linear ;
-    -moz-transition:transform 0.5s linear ;
-    -ms-transition:transform 0.5s linear ;
-    -o-transition:transform 0.5s linear ;
+.downloadBtn {
+  background-color: rgb(36, 80, 102);
+  padding: 15px;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+  border: 0px solid transparent;
+  cursor: pointer;
+  font-weight: bold;
+  transition: transform 0.5s linear;
+  -webkit-transition: transform 0.5s linear;
+  -moz-transition: transform 0.5s linear;
+  -ms-transition: transform 0.5s linear;
+  -o-transition: transform 0.5s linear;
 }
-.downloadBtn:hover{
-    transform:scale(1.2);
-    -webkit-transform:scale(1.2);
-    -moz-transform:scale(1.2);
-    -ms-transform:scale(1.2);
-    -o-transform:scale(1.2);
+.downloadBtn:hover {
+  transform: scale(1.2);
+  -webkit-transform: scale(1.2);
+  -moz-transform: scale(1.2);
+  -ms-transform: scale(1.2);
+  -o-transform: scale(1.2);
 }
 @media (max-width: 768px) {
-    .downloadBtnContainer{
-        width:100%;
-        display:flex;
-        padding: 0px;
-        justify-content: center;
-    }
+  .downloadBtnContainer {
+    width: 100%;
+    display: flex;
+    padding: 0px;
+    justify-content: center;
+  }
 }

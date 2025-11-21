@@ -36,11 +36,15 @@ export default function FrontendSkillSection() {
             </p>
           </div>
         </div>
-        {showList ? (
-          <IoIosArrowUp className={styles.arrowIcon} />
-        ) : (
-          <IoIosArrowDown className={styles.arrowIcon} />
-        )}
+        <div className={styles.arrowIconContainer}>
+          <IoIosArrowDown
+            className={styles.arrowIcon}
+            style={{
+              transform: showList ? "rotate(-180deg)" : "rotate(0deg)",
+              transition: "transform 0.3s linear",
+            }}
+          />
+        </div>
       </div>
       {showList && (
         <div className={styles.listMenu}>

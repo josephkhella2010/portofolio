@@ -1,0 +1,47 @@
+.trackSkillMainContainer {
+  padding: 50px 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.trackSkillContainer {
+  width: 90%;
+  height: 100px;
+  overflow: hidden;
+  position: relative;
+  background-color: rgb(52, 30, 70);
+  display: block;
+  display: flex;
+  align-items: center;
+  border-radius: 10px;
+  box-shadow: 0px 0px 3px 3px rgba(249, 249, 249, 0.099),
+    0px 0px 5px 5px rgba(249, 249, 249, 0.099),
+    0px 0px 8px 8px rgba(249, 249, 249, 0.099),
+    0px 0px 10px 10px rgba(249, 249, 249, 0.099);
+}
+
+.trackSkillSection {
+  display: flex;
+  gap: 20px;
+  position: absolute;
+  left: 0;
+  white-space: nowrap;
+  will-change: transform;
+  animation: scroll 10s linear infinite;
+}
+
+.trackSkillContent {
+  padding: 30px;
+  flex-shrink: 0;
+  white-space: nowrap;
+  font-weight: 600;
+}
+@keyframes scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
