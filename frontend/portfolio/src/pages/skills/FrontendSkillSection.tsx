@@ -1,7 +1,7 @@
 import { useState } from "react";
 import styles from "./skill.module.css";
 import { FaGreaterThan, FaLessThan } from "react-icons/fa6";
-import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
+import { IoIosArrowDown } from "react-icons/io";
 import WebExperienceSection from "./WebExperienceSection";
 import { useText } from "../../utils/translationUtils";
 
