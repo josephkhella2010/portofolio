@@ -63,7 +63,7 @@ export default function DesktopNavigation() {
           {GetText("nav/linkFour")}
         </li>
         <li className={styles.link} onClick={() => handleClick("itSkill")}>
-          kunskaper
+          {GetText("nav/linkFive")}
         </li>
       </ul>
     </nav>

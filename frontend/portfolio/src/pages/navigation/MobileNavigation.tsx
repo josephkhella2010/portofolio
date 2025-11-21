@@ -71,7 +71,7 @@ export default function MobileNavigation() {
           {GetText("nav/linkFour")}
         </li>
         <li className={styles.link} onClick={() => handleClick("itSkill")}>
-          kunskaper
+          {GetText("nav/linkFive")}
         </li>
       </ul>
     </nav>
