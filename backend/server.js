@@ -57,6 +57,7 @@ app.listen(process.env.PORT, () => {
   );
 });
  */
+
 const express = require("express");
 const cors = require("cors");
 const nodemailer = require("nodemailer");
@@ -73,15 +74,15 @@ app.get("/test", (req, res) => {
 // Brevo SMTP Transporter
 const transporter = nodemailer.createTransport({
   host: process.env.BREVO_HOST,
-  port: process.env.BREVO_PORT,
-  secure: false, // Brevo uses STARTTLS on port 587
+  port: Number(process.env.BREVO_PORT),
+  secure: false, // MUST be false for port 587
   auth: {
     user: process.env.BREVO_USER,
     pass: process.env.BREVO_PASSWORD,
   },
 });
 
-// Send email
+// Send email route
 app.post("/api/send-email", async (req, res) => {
   const { name, email, subject } = req.body;
 
@@ -91,8 +92,9 @@ app.post("/api/send-email", async (req, res) => {
 
   try {
     await transporter.sendMail({
-      from: email,
-      to: process.env.USER_EMAIL,
+      from: process.env.BREVO_USER, // Important: must be Brevo SMTP user
+      to: process.env.USER_EMAIL, // Email YOU will receive
+      replyTo: email, // So you can reply to client
       subject: "New Form Submission",
       text: `Name: ${name}\nEmail: ${email}\nMessage: ${subject}`,
     });
