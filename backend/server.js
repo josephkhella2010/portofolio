@@ -7,6 +7,9 @@ app.use(express.json());
 
 //#######################################################
 app.use("/api/send-message", require("./RouterApi/SendEmail"));
+app.get("/test", (req, res) => {
+  res.send("Backend is working");
+});
 
 //#######################################################
 app.listen(process.env.PORT, () => {
