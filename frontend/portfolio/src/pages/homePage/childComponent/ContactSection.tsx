@@ -219,7 +219,10 @@ export default function ContactSection() {
         toast.error(GetText("contact/error"));
         return;
       }
-      await axios.post("http://localhost:3500/api/send-email", newSms);
+      await axios.post(
+        "https://portofolio-backend-f615.onrender.com/api/send-email",
+        newSms
+      );
       toast.success(GetText("contact/sucess"));
       setListOfSms((prev) => [...prev, newSms]);
 

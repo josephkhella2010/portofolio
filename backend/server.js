@@ -59,7 +59,6 @@ app.listen(process.env.PORT, () => {
  */
 const express = require("express");
 const cors = require("cors");
-const SibApiV3Sdk = require("sib-api-v3-sdk");
 require("dotenv").config();
 
 const app = express();
@@ -81,44 +80,7 @@ app.get("/debug", (req, res) => {
     userEmail: process.env.USER_EMAIL,
   });
 });
-
-// Brevo configuration
-SibApiV3Sdk.ApiClient.instance.authentications["api-key"].apiKey =
-  process.env.BREVO_API_KEY;
-
-const apiInstance = new SibApiV3Sdk.TransactionalEmailsApi();
-
-app.post("/api/send-email", async (req, res) => {
-  const { name, email, subject } = req.body;
-
-  if (!name || !email || !subject) {
-    return res.status(400).json({ error: "Please fill all fields" });
-  }
-
-  try {
-    await apiInstance.sendTransacEmail({
-      sender: {
-        name: "Portfolio Website",
-        email: "josephkhella2030@gmail.com", // your Brevo verified sender
-      },
-      to: [{ email: process.env.USER_EMAIL }],
-      replyTo: { email },
-      subject: "New Form Submission",
-      textContent: `Name: ${name}\nEmail: ${email}\nMessage: ${subject}`,
-    });
-
-    res.json({ success: true, message: "Email sent successfully" });
-  } catch (error) {
-    const brevoError = error.response?.text || error.message;
-    console.error("Email - error:", brevoError);
-
-    res.status(500).json({
-      error: "Email failed to send",
-      details: brevoError,
-    });
-  }
-});
-
+app.use("/api/send-email", require("./RouterApi/sendSms"));
 // Start server
 app.listen(process.env.PORT || 3500, () => {
   console.log("Server running...");
