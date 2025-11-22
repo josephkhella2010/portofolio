@@ -59,21 +59,29 @@ app.listen(process.env.PORT, () => {
  */
 const express = require("express");
 const cors = require("cors");
-const { Resend } = require("resend");
+const nodemailer = require("nodemailer");
 require("dotenv").config();
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 
-const resend = new Resend(process.env.RESEND_API_KEY);
-
-// Test route
 app.get("/test", (req, res) => {
   res.send("Backend is working");
 });
 
-// Send email route
+// Brevo SMTP Transporter
+const transporter = nodemailer.createTransport({
+  host: process.env.BREVO_HOST,
+  port: process.env.BREVO_PORT,
+  secure: false, // Brevo uses STARTTLS on port 587
+  auth: {
+    user: process.env.BREVO_USER,
+    pass: process.env.BREVO_PASSWORD,
+  },
+});
+
+// Send email
 app.post("/api/send-email", async (req, res) => {
   const { name, email, subject } = req.body;
 
@@ -82,15 +90,11 @@ app.post("/api/send-email", async (req, res) => {
   }
 
   try {
-    await resend.emails.send({
-      from: "Portfolio Contact <onboarding@resend.dev>",
+    await transporter.sendMail({
+      from: email,
       to: process.env.USER_EMAIL,
       subject: "New Form Submission",
-      text: `
-        Name: ${name}
-        Email: ${email}
-        Message: ${subject}
-      `,
+      text: `Name: ${name}\nEmail: ${email}\nMessage: ${subject}`,
     });
 
     res.json({ success: true, message: "Email sent successfully" });
@@ -100,6 +104,7 @@ app.post("/api/send-email", async (req, res) => {
   }
 });
 
+// Start server
 app.listen(process.env.PORT || 3600, () => {
   console.log(`Server running on port ${process.env.PORT || 3600}`);
 });
