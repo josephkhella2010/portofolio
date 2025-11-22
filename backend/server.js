@@ -60,24 +60,19 @@ app.listen(process.env.PORT, () => {
 
 const express = require("express");
 const cors = require("cors");
-require("dotenv").config();
 const SibApiV3Sdk = require("sib-api-v3-sdk");
+require("dotenv").config();
 
 const app = express();
-app.use(cors({ origin: "*" }));
+app.use(cors());
 app.use(express.json());
 
-// Configure Brevo API
-let defaultClient = SibApiV3Sdk.ApiClient.instance;
-let apiKeyAuth = defaultClient.authentications["api-key"];
-apiKeyAuth.apiKey = process.env.BREVO_API_KEY;
+// Brevo configuration
+SibApiV3Sdk.ApiClient.instance.authentications["api-key"].apiKey =
+  process.env.BREVO_API_KEY;
 
-// Test route
-app.get("/test", (req, res) => {
-  res.send("Backend is working");
-});
+const apiInstance = new SibApiV3Sdk.TransactionalEmailsApi();
 
-// Send email route
 app.post("/api/send-email", async (req, res) => {
   const { name, email, subject } = req.body;
 
@@ -86,26 +81,20 @@ app.post("/api/send-email", async (req, res) => {
   }
 
   try {
-    const apiInstance = new SibApiV3Sdk.TransactionalEmailsApi();
-
     await apiInstance.sendTransacEmail({
-      sender: { email: "josephkhella2030@gmail.com", name: "Website Form" },
-
-      to: [
-        {
-          email: process.env.USER_EMAIL, // Where YOU receive messages
-        },
-      ],
-
+      sender: {
+        name: "Portfolio Website",
+        email: "josephkhella2030@gmail.com", // your Brevo verified email
+      },
+      to: [{ email: process.env.USER_EMAIL }],
       replyTo: { email },
-
       subject: "New Form Submission",
       textContent: `Name: ${name}\nEmail: ${email}\nMessage: ${subject}`,
     });
 
     res.json({ success: true, message: "Email sent successfully" });
   } catch (error) {
-    console.error("Email error:", error.message);
+    console.error("Email error:", error.response?.text || error.message);
     res.status(500).json({
       error: "Email failed to send",
       details: error.message,
@@ -113,8 +102,6 @@ app.post("/api/send-email", async (req, res) => {
   }
 });
 
-// Start server
-const PORT = process.env.PORT || 3500;
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+app.listen(process.env.PORT || 3500, () => {
+  console.log("Server running...");
 });
