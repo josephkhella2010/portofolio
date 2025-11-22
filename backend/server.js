@@ -59,27 +59,18 @@ app.listen(process.env.PORT, () => {
  */
 const express = require("express");
 const cors = require("cors");
-const nodemailer = require("nodemailer");
+const { Resend } = require("resend");
 require("dotenv").config();
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 
+const resend = new Resend(process.env.RESEND_API_KEY);
+
 // Test route
 app.get("/test", (req, res) => {
   res.send("Backend is working");
-});
-
-// Gmail SMTP Transporter (REQUIRED for Render)
-const transporter = nodemailer.createTransport({
-  host: "smtp.gmail.com",
-  port: 465,
-  secure: true,
-  auth: {
-    user: process.env.USER_EMAIL, // Gmail address
-    pass: process.env.USER_PASSWORD, // 16-digit Gmail App Password
-  },
 });
 
 // Send email route
@@ -91,10 +82,9 @@ app.post("/api/send-email", async (req, res) => {
   }
 
   try {
-    await transporter.sendMail({
-      from: process.env.USER_EMAIL, // Gmail requires your own email
-      to: process.env.USER_EMAIL, // Send to yourself
-      replyTo: email, // So you can reply directly
+    await resend.emails.send({
+      from: "Portfolio Contact <onboarding@resend.dev>",
+      to: process.env.USER_EMAIL,
       subject: "New Form Submission",
       text: `
         Name: ${name}
@@ -110,7 +100,6 @@ app.post("/api/send-email", async (req, res) => {
   }
 });
 
-// Start server
 app.listen(process.env.PORT || 3600, () => {
   console.log(`Server running on port ${process.env.PORT || 3600}`);
 });
