@@ -228,7 +228,7 @@ export default function ContactSection() {
 
       setSms({ name: "", email: "", subject: "" });
     } catch (error) {
-      console.log(error);
+      console.log(error, "error");
     }
   }
 
