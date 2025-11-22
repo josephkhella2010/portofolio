@@ -106,10 +106,10 @@ app.post("/api/send-email", async (req, res) => {
       text: `Name: ${name}\nEmail: ${email}\nMessage: ${subject}`,
     });
 
-    res.json({ success: true, message: "Email sent successfully" });
+    return res.json({ success: true, message: "Email sent successfully" });
   } catch (error) {
     console.error("Email error:", error);
-    res.status(500).json({ error: "Email failed to send" });
+    return res.status(500).json({ error: "Email failed to send" });
   }
 });
 
