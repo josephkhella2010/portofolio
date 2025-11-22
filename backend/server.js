@@ -57,28 +57,35 @@ app.listen(process.env.PORT, () => {
   );
 });
  */
-
 const express = require("express");
 const cors = require("cors");
 const nodemailer = require("nodemailer");
 require("dotenv").config();
 
 const app = express();
-app.use(cors());
+
+// CORS — allow frontend (replace * with your website domain if needed)
+app.use(
+  cors({
+    origin: "*",
+  })
+);
+
 app.use(express.json());
 
+// Test route
 app.get("/test", (req, res) => {
   res.send("Backend is working");
 });
 
 // Brevo SMTP Transporter
 const transporter = nodemailer.createTransport({
-  host: process.env.BREVO_HOST,
-  port: Number(process.env.BREVO_PORT),
+  host: process.env.BREVO_HOST, // smtp-relay.brevo.com
+  port: Number(process.env.BREVO_PORT) || 587,
   secure: false, // MUST be false for port 587
   auth: {
-    user: process.env.BREVO_USER,
-    pass: process.env.BREVO_PASSWORD,
+    user: process.env.BREVO_USER, // 9c44fa001@smtp-brevo.com
+    pass: process.env.BREVO_PASSWORD, // your Brevo SMTP key
   },
 });
 
@@ -92,9 +99,9 @@ app.post("/api/send-email", async (req, res) => {
 
   try {
     await transporter.sendMail({
-      from: process.env.BREVO_USER, // Important: must be Brevo SMTP user
-      to: process.env.USER_EMAIL, // Email YOU will receive
-      replyTo: email, // So you can reply to client
+      from: `"Website Form" <${process.env.BREVO_USER}>`,
+      to: process.env.USER_EMAIL, // where you receive emails
+      replyTo: email,
       subject: "New Form Submission",
       text: `Name: ${name}\nEmail: ${email}\nMessage: ${subject}`,
     });
@@ -106,7 +113,8 @@ app.post("/api/send-email", async (req, res) => {
   }
 });
 
-// Start server
-app.listen(process.env.PORT || 3600, () => {
-  console.log(`Server running on port ${process.env.PORT || 3600}`);
+// Start server (Render sets PORT automatically)
+const PORT = process.env.PORT || 3500;
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
 });
