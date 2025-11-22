@@ -220,7 +220,7 @@ export default function ContactSection() {
         return;
       }
       await axios.post(
-        "https://portofolio-klac.onrender.com/api/send-message",
+        "https://portofolio-klac.onrender.com/api/send-email",
         newSms
       );
       toast.success(GetText("contact/sucess"));
