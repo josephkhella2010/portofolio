@@ -46,6 +46,9 @@ app.post("/api/send-email", async (req, res) => {
     return res.status(404).json({ error });
   }
 });
+app.get("/check-routes", (req, res) => {
+  res.json({ message: "Routes loaded" });
+});
 
 //#######################################################
 app.listen(process.env.PORT, () => {
