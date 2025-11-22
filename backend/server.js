@@ -110,7 +110,7 @@ app.post("/api/send-email", async (req, res) => {
     res.json({ success: true, message: "Email sent successfully" });
   } catch (error) {
     const brevoError = error.response?.text || error.message;
-    console.error("Email error:", brevoError);
+    console.error("Email - error:", brevoError);
 
     res.status(500).json({
       error: "Email failed to send",
