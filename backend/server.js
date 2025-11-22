@@ -57,39 +57,28 @@ app.listen(process.env.PORT, () => {
   );
 });
  */
+
 const express = require("express");
 const cors = require("cors");
-const nodemailer = require("nodemailer");
 require("dotenv").config();
 
+const SibApiV3Sdk = require("sib-api-v3-sdk");
+
 const app = express();
-
-// CORS — allow frontend (replace * with your website domain if needed)
-app.use(
-  cors({
-    origin: "*",
-  })
-);
-
+app.use(cors());
 app.use(express.json());
 
-// Test route
+// Configure Brevo
+let defaultClient = SibApiV3Sdk.ApiClient.instance;
+let apiKey = defaultClient.authentications["api-key"];
+apiKey.apiKey = process.env.BREVO_API_KEY;
+
+// Test
 app.get("/test", (req, res) => {
   res.send("Backend is working");
 });
 
-// Brevo SMTP Transporter
-const transporter = nodemailer.createTransport({
-  host: process.env.BREVO_HOST, // smtp-relay.brevo.com
-  port: Number(process.env.BREVO_PORT) || 587,
-  secure: false, // MUST be false for port 587
-  auth: {
-    user: process.env.BREVO_USER, // 9c44fa001@smtp-brevo.com
-    pass: process.env.BREVO_PASSWORD, // your Brevo SMTP key
-  },
-});
-
-// Send email route
+// Send email
 app.post("/api/send-email", async (req, res) => {
   const { name, email, subject } = req.body;
 
@@ -98,22 +87,24 @@ app.post("/api/send-email", async (req, res) => {
   }
 
   try {
-    await transporter.sendMail({
-      from: `"Website Form" <${process.env.BREVO_USER}>`,
-      to: process.env.USER_EMAIL, // where you receive emails
-      replyTo: email,
+    let apiInstance = new SibApiV3Sdk.TransactionalEmailsApi();
+
+    await apiInstance.sendTransacEmail({
+      sender: { email: email, name: "Website Form" },
+      to: [{ email: process.env.USER_EMAIL }],
+      replyTo: { email: email },
       subject: "New Form Submission",
-      text: `Name: ${name}\nEmail: ${email}\nMessage: ${subject}`,
+      textContent: `Name: ${name}\nEmail: ${email}\nMessage: ${subject}`,
     });
 
-    return res.json({ success: true, message: "Email sent successfully" });
+    res.json({ success: true, message: "Email sent successfully" });
   } catch (error) {
     console.error("Email error:", error);
-    return res.status(500).json({ error: "Email failed to send" });
+    res.status(500).json({ error: "Email failed", details: error.message });
   }
 });
 
-// Start server (Render sets PORT automatically)
+// Start server
 const PORT = process.env.PORT || 3500;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
