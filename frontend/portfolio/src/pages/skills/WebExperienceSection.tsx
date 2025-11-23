@@ -238,14 +238,18 @@ export default function WebExperienceSection() {
 
   const sorted = [...webSkill].sort((a, b) => b.scale - a.scale);
 
-  const [progressVal, setProgressVal] = useState(Array(sorted.length).fill(0));
+  // only store values, not background
+  const [progressVal, setProgressVal] = useState(() =>
+    Array(sorted.length).fill(0)
+  );
 
   useEffect(() => {
-    const interval = setInterval(() => {
+    let frame: number;
+
+    const animate = () => {
       setProgressVal((prev) => {
         let done = true;
-
-        const updated = prev.map((v, i) => {
+        const next = prev.map((v, i) => {
           if (v < sorted[i].scale) {
             done = false;
             return v + 1;
@@ -253,12 +257,15 @@ export default function WebExperienceSection() {
           return v;
         });
 
-        if (done) clearInterval(interval);
-        return updated;
+        // continue animation using requestAnimationFrame
+        if (!done) frame = requestAnimationFrame(animate);
+        return next;
       });
-    }, 15);
+    };
 
-    return () => clearInterval(interval);
+    frame = requestAnimationFrame(animate);
+
+    return () => cancelAnimationFrame(frame);
   }, []);
 
   return (
@@ -269,7 +276,7 @@ export default function WebExperienceSection() {
             className={styles.progress}
             style={
               {
-                "--deg": `${(progressVal[index] * 360) / 100}deg`,
+                "--p": progressVal[index], // <-- only variable changes
               } as React.CSSProperties
             }
           >
