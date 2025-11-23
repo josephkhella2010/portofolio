@@ -207,6 +207,7 @@ export default function WebExperienceSection() {
     </div>
   );
 } */
+
 import { useEffect, useRef } from "react";
 import styles from "./skill.module.css";
 
@@ -237,84 +238,80 @@ export default function WebExperienceSection() {
 
   const sorted = [...webSkill].sort((a, b) => b.scale - a.scale);
 
-  // refs to progress elements and percentage text elements
-  const progressElsRef = useRef<HTMLDivElement[]>([]);
-  const percentElsRef = useRef<HTMLParagraphElement[]>([]);
-
-  // Ensure arrays have proper length
-  useEffect(() => {
-    progressElsRef.current = progressElsRef.current.slice(0, sorted.length);
-    percentElsRef.current = percentElsRef.current.slice(0, sorted.length);
-  }, [sorted.length]);
+  const refs = useRef<(SVGCircleElement | null)[]>([]);
+  const percentRefs = useRef<(HTMLParagraphElement | null)[]>([]);
 
   useEffect(() => {
-    // store current progress per item locally (not in React state)
-    const current: number[] = Array(sorted.length).fill(0);
-    let rafId = 0;
-    const speed = 1; // increment per frame (tweak: 1 = fast, 0.5 = slower)
-    const fpsThrottle = 1; // update every 'n' RAF frames (1 = every frame). Increase if you want lower CPU.
+    const radius = 45;
+    const circumference = 2 * Math.PI * radius;
+    const speed = 1;
 
-    let frameCount = 0;
+    const current = Array(sorted.length).fill(0);
+    let raf: number;
 
     const animate = () => {
-      frameCount++;
       let allDone = true;
 
       for (let i = 0; i < sorted.length; i++) {
         if (current[i] < sorted[i].scale) {
           allDone = false;
+          current[i] = Math.min(sorted[i].scale, current[i] + speed);
 
-          // only change on throttled frames to reduce work if desired
-          if (frameCount % fpsThrottle === 0) {
-            // increment but clamp to target
-            current[i] = Math.min(sorted[i].scale, current[i] + speed);
+          const circle = refs.current[i];
+          const percent = percentRefs.current[i];
 
-            // update CSS variable --p (value 0..100) on element directly
-            const el = progressElsRef.current[i];
-            if (el) {
-              el.style.setProperty("--p", String(current[i]));
-            }
-
-            // update percent text directly
-            const pct = percentElsRef.current[i];
-            if (pct) pct.textContent = `${current[i]}%`;
+          if (circle) {
+            const offset = circumference - (current[i] / 100) * circumference;
+            circle.style.strokeDashoffset = `${offset}`;
           }
+
+          if (percent) percent.textContent = `${current[i]}%`;
         }
       }
 
-      if (!allDone) {
-        rafId = requestAnimationFrame(animate);
-      }
+      if (!allDone) raf = requestAnimationFrame(animate);
     };
 
-    rafId = requestAnimationFrame(animate);
-
-    return () => cancelAnimationFrame(rafId);
+    raf = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(raf);
   }, [sorted]);
 
   return (
     <div className={styles.progressWrapper}>
-      {sorted.map((item, index) => (
+      {sorted.map((item, i) => (
         <div key={item.name} className={styles.circle}>
-          <div
-            className={styles.progress}
-            // initial CSS var (important for non-animated initial render)
-            style={{ ["--p" as any]: "0" } as React.CSSProperties}
-            ref={(el) => {
-              if (!el) return;
-              progressElsRef.current[index] = el;
-            }}
-          >
+          <div className={styles.progress}>
+            <svg width="120" height="120">
+              <circle
+                cx="60"
+                cy="60"
+                r="45"
+                stroke="rgba(101,102,103,0.4)"
+                strokeWidth="10"
+                fill="none"
+              />
+
+              <circle
+                ref={(el) => (refs.current[i] = el)}
+                cx="60"
+                cy="60"
+                r="45"
+                stroke="rgb(67,54,84)"
+                strokeWidth="10"
+                fill="none"
+                strokeLinecap="round"
+                strokeDasharray={2 * Math.PI * 45}
+                strokeDashoffset={2 * Math.PI * 45}
+                style={{
+                  filter:
+                    "drop-shadow(0 0 10px rgba(67,54,84,0.8)) drop-shadow(0 0 15px rgba(101,102,103,0.7))",
+                }}
+              />
+            </svg>
+
             <div className={styles.valueContainer}>
               <p>{item.name}</p>
-              <p
-                ref={(el) => {
-                  if (!el) return;
-                  percentElsRef.current[index] = el;
-                }}
-              >
-                0%
-              </p>
+              <p ref={(el) => (percentRefs.current[i] = el)}>0%</p>
             </div>
           </div>
         </div>
