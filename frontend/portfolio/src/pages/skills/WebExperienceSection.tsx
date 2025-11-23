@@ -58,12 +58,26 @@ export default function WebExperienceSection() {
         <div key={index} className={styles.circle}>
           <div
             className={styles.progress}
-            style={{
+            /*             style={{
               background: `conic-gradient(rgb(67 54 84) ${
                 (progressVal[index] * 360) / 100
               }deg,rgb(101 102 103 / 94%) ${
                 (progressVal[index] * 360) / 100
               }deg)`,
+            }}
+ */ style={{
+              background: `conic-gradient(
+    rgb(67 54 84) ${(progressVal[index] * 360) / 100}deg,
+    rgb(101 102 103 / 94%) ${(progressVal[index] * 360) / 100}deg
+  )`,
+              boxShadow: `
+    0 0 25px rgba(67,54,84,0.9),
+    0 0 30px rgba(101,102,103,0.6),
+    inset 0 0 25px rgba(67,54,84,0.7),
+    inset 0 0 30px rgba(101,102,103,0.6)
+  `,
+              filter: "brightness(1.35) saturate(1.45)",
+              borderRadius: "50%",
             }}
           >
             <div className={styles.valueContainer}>

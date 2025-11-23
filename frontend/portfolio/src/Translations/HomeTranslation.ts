@@ -117,6 +117,10 @@ const HomeTranslations = {
     sv: "Plats",
     en: "Place",
   },
+  "home/contactSection/sendingSection": {
+    sv: "Vänta medan meddelandet skickas",
+    en: "Wait For Sending Message",
+  },
 };
 
 export default HomeTranslations;

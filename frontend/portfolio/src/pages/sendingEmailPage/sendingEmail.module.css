@@ -1,0 +1,58 @@
+.SendingEmailContainer {
+  background-color: rgba(0, 0, 0, 0.79);
+  width: 100%;
+  height: 100dvh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+}
+.SendingEmailSection {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  align-items: center;
+}
+.SendingEmailUpperContent {
+  font-weight: 600;
+  font-size: 36px;
+}
+
+.SendingEmailLowerContent {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+  justify-content: center;
+  flex-direction: row-reverse;
+}
+.dots {
+  width: 15px;
+  height: 15px;
+  background-color: #ffffff;
+  border-radius: 50%;
+  opacity: 0;
+  animation: appearMove 1.8s infinite;
+  position: relative;
+}
+
+@keyframes appearMove {
+  0% {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  20% {
+    opacity: 1;
+    transform: translateX(0px);
+  }
+  80% {
+    opacity: 1;
+    transform: translateX(0px);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+}

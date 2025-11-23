@@ -40,7 +40,6 @@ export default function Testimonial() {
     },
   ];
   const [currentIndex, setCurrentIndex] = useState<number>(0);
-  console.log(currentIndex);
   const slider = useRef<HTMLDivElement | null>(null);
 
   return (

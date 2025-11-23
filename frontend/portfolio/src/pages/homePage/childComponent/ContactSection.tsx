@@ -192,6 +192,8 @@ import { BiSend, BiSolidHandDown } from "react-icons/bi";
 import { toast } from "react-toastify";
 import axios from "axios";
 import { useText } from "../../../utils/translationUtils";
+import { useDispatch } from "react-redux";
+import { setIsSending } from "../../../reducerSlice/SendingReducer";
 interface SmsType {
   name: string;
   email: string;
@@ -205,10 +207,12 @@ export default function ContactSection() {
   });
   const [_listOfSms, setListOfSms] = useState<SmsType[]>([]);
   const GetText = useText();
+  const dispatch = useDispatch();
 
   const form = useRef<HTMLFormElement | null>(null);
   async function sendEmail(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    dispatch(setIsSending(true));
     try {
       const newSms = {
         name: sms.name,
@@ -229,6 +233,8 @@ export default function ContactSection() {
       setSms({ name: "", email: "", subject: "" });
     } catch (error) {
       console.log(error, "error");
+    } finally {
+      dispatch(setIsSending(false));
     }
   }
 
