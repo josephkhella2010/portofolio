@@ -1,4 +1,4 @@
-/* import styles from "./TrackContainer.module.css";
+import styles from "./TrackContainer.module.css";
 
 const Languages: string[] = [
   "HTML",
@@ -33,4 +33,3 @@ export default function TrackSkillContainer() {
     </div>
   );
 }
- */
