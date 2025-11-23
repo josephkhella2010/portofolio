@@ -207,8 +207,7 @@ export default function WebExperienceSection() {
     </div>
   );
 } */
-
-import { useEffect, useState } from "react";
+import { useEffect, useRef } from "react";
 import styles from "./skill.module.css";
 
 interface WebSkillType {
@@ -238,35 +237,60 @@ export default function WebExperienceSection() {
 
   const sorted = [...webSkill].sort((a, b) => b.scale - a.scale);
 
-  // only store values, not background
-  const [progressVal, setProgressVal] = useState(() =>
-    Array(sorted.length).fill(0)
-  );
+  // refs to progress elements and percentage text elements
+  const progressElsRef = useRef<HTMLDivElement[]>([]);
+  const percentElsRef = useRef<HTMLParagraphElement[]>([]);
+
+  // Ensure arrays have proper length
+  useEffect(() => {
+    progressElsRef.current = progressElsRef.current.slice(0, sorted.length);
+    percentElsRef.current = percentElsRef.current.slice(0, sorted.length);
+  }, [sorted.length]);
 
   useEffect(() => {
-    let frame: number;
+    // store current progress per item locally (not in React state)
+    const current: number[] = Array(sorted.length).fill(0);
+    let rafId = 0;
+    const speed = 1; // increment per frame (tweak: 1 = fast, 0.5 = slower)
+    const fpsThrottle = 1; // update every 'n' RAF frames (1 = every frame). Increase if you want lower CPU.
+
+    let frameCount = 0;
 
     const animate = () => {
-      setProgressVal((prev) => {
-        let done = true;
-        const next = prev.map((v, i) => {
-          if (v < sorted[i].scale) {
-            done = false;
-            return v + 1;
-          }
-          return v;
-        });
+      frameCount++;
+      let allDone = true;
 
-        // continue animation using requestAnimationFrame
-        if (!done) frame = requestAnimationFrame(animate);
-        return next;
-      });
+      for (let i = 0; i < sorted.length; i++) {
+        if (current[i] < sorted[i].scale) {
+          allDone = false;
+
+          // only change on throttled frames to reduce work if desired
+          if (frameCount % fpsThrottle === 0) {
+            // increment but clamp to target
+            current[i] = Math.min(sorted[i].scale, current[i] + speed);
+
+            // update CSS variable --p (value 0..100) on element directly
+            const el = progressElsRef.current[i];
+            if (el) {
+              el.style.setProperty("--p", String(current[i]));
+            }
+
+            // update percent text directly
+            const pct = percentElsRef.current[i];
+            if (pct) pct.textContent = `${current[i]}%`;
+          }
+        }
+      }
+
+      if (!allDone) {
+        rafId = requestAnimationFrame(animate);
+      }
     };
 
-    frame = requestAnimationFrame(animate);
+    rafId = requestAnimationFrame(animate);
 
-    return () => cancelAnimationFrame(frame);
-  }, []);
+    return () => cancelAnimationFrame(rafId);
+  }, [sorted]);
 
   return (
     <div className={styles.progressWrapper}>
@@ -274,15 +298,23 @@ export default function WebExperienceSection() {
         <div key={item.name} className={styles.circle}>
           <div
             className={styles.progress}
-            style={
-              {
-                "--p": progressVal[index], // <-- only variable changes
-              } as React.CSSProperties
-            }
+            // initial CSS var (important for non-animated initial render)
+            style={{ ["--p" as any]: "0" } as React.CSSProperties}
+            ref={(el) => {
+              if (!el) return;
+              progressElsRef.current[index] = el;
+            }}
           >
             <div className={styles.valueContainer}>
               <p>{item.name}</p>
-              <p>{progressVal[index]}%</p>
+              <p
+                ref={(el) => {
+                  if (!el) return;
+                  percentElsRef.current[index] = el;
+                }}
+              >
+                0%
+              </p>
             </div>
           </div>
         </div>
