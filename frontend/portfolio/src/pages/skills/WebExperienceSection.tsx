@@ -283,8 +283,6 @@ export default function WebExperienceSection() {
                 rgb(67 54 84) ${(progressVal[index] * 360) / 100}deg,
                 rgb(101 102 103 / 94%) ${(progressVal[index] * 360) / 100}deg
               )`,
-                filter: "brightness(1.35) saturate(1.45)",
-                borderRadius: "50%",
               }}
             >
               <div className={styles.valueContainer}>
