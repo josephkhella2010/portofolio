@@ -216,7 +216,6 @@ interface WebSkillType {
 }
 
 export default function WebExperienceSection() {
-  // Skill data
   const webSkill: WebSkillType[] = useMemo(
     () => [
       { name: "HTML", scale: 100 },
@@ -239,34 +238,43 @@ export default function WebExperienceSection() {
     []
   );
 
-  // SORT first (VERY IMPORTANT)
   const sortedSkill = useMemo(
     () => [...webSkill].sort((a, b) => b.scale - a.scale),
     [webSkill]
   );
 
-  // progress must MATCH the sorted array
   const [progressVal, setProgressVal] = useState<number[]>(
     Array(sortedSkill.length).fill(0)
   );
 
-  // Animate using sortedSkill, not webSkill
+  // 🎯 MOBILE-SAFE ANIMATION — requestAnimationFrame
   useEffect(() => {
-    const interval = setInterval(() => {
-      setProgressVal((prev) => {
-        const next = prev.map((val, i) =>
-          val < sortedSkill[i].scale ? val + 1 : val
-        );
+    let frameId: number;
 
-        if (next.every((v, i) => v === sortedSkill[i].scale)) {
-          clearInterval(interval);
+    const animate = () => {
+      setProgressVal((prev) => {
+        let changed = false;
+
+        const next = prev.map((val, i) => {
+          if (val < sortedSkill[i].scale) {
+            changed = true;
+            return val + 1;
+          }
+          return val;
+        });
+
+        // continue animation only if needed
+        if (changed) {
+          frameId = requestAnimationFrame(animate);
         }
 
         return next;
       });
-    }, 12);
+    };
 
-    return () => clearInterval(interval);
+    frameId = requestAnimationFrame(animate);
+
+    return () => cancelAnimationFrame(frameId);
   }, [sortedSkill]);
 
   return (
@@ -277,9 +285,9 @@ export default function WebExperienceSection() {
             className={styles.progress}
             style={{
               background: `conic-gradient(
-                  rgb(67 54 84) ${(progressVal[index] * 360) / 100}deg,
-                  rgb(101 102 103 / 94%) ${(progressVal[index] * 360) / 100}deg
-                )`,
+                rgb(67 54 84) ${(progressVal[index] * 360) / 100}deg,
+                rgb(101 102 103 / 94%) ${(progressVal[index] * 360) / 100}deg
+              )`,
               boxShadow: `
                 0 0 25px rgba(67,54,84,0.9),
                 0 0 30px rgba(101,102,103,0.6),
