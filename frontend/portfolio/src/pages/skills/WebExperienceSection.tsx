@@ -236,53 +236,44 @@ export default function WebExperienceSection() {
     { name: "Vue", scale: 65 },
   ];
 
-  // sort normally (no useMemo)
+  // 🔥 FIX: sort only once BEFORE creating progress array
+  const sorted = [...webSkill].sort((a, b) => b.scale - a.scale);
 
-  const [progressVal, setProgressVal] = useState<number[]>(
-    Array(webSkill.length).fill(0)
-  );
+  // 🔥 FIX: progress array must match sorted list
+  const [progressVal, setProgressVal] = useState(Array(sorted.length).fill(0));
 
   useEffect(() => {
     const interval = setInterval(() => {
       setProgressVal((prev) => {
-        let allDone = true;
+        let done = true;
 
-        const next = prev.map((val, i) => {
-          if (val < webSkill[i].scale) {
-            allDone = false;
+        const updated = prev.map((val, i) => {
+          if (val < sorted[i].scale) {
+            done = false;
             return val + 1;
           }
           return val;
         });
 
-        if (allDone) clearInterval(interval);
-
-        return next;
+        if (done) clearInterval(interval);
+        return updated;
       });
-    }, 12);
+    }, 15);
 
     return () => clearInterval(interval);
-  }, []);
+  }, []); // no dependency so it runs once
 
   return (
     <div className={styles.progressWrapper}>
-      {webSkill.map((item, index) => (
+      {sorted.map((item, index) => (
         <div key={item.name} className={styles.circle}>
           <div
             className={styles.progress}
             style={{
               background: `conic-gradient(
-      rgb(67 54 84) ${(progressVal[index] * 360) / 100}deg,
-      rgb(101 102 103 / 94%) ${(progressVal[index] * 360) / 100}deg
-    )`,
-              /*            boxShadow: `
-      0 0 25px rgba(67,54,84,0.9),
-      0 0 30px rgba(101,102,103,0.6),
-      inset 0 0 25px rgba(67,54,84,0.7),
-      inset 0 0 30px rgba(101,102,103,0.6)
-    `,
-              filter: "brightness(1.35) saturate(1.45)",
-              borderRadius: "50%", */
+                rgb(67 54 84) ${(progressVal[index] * 360) / 100}deg,
+                rgb(101 102 103 / 94%) ${(progressVal[index] * 360) / 100}deg
+              )`,
             }}
           >
             <div className={styles.valueContainer}>
