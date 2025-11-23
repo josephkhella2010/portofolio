@@ -236,10 +236,8 @@ export default function WebExperienceSection() {
     { name: "Vue", scale: 65 },
   ];
 
-  // 🔥 FIX: sort only once BEFORE creating progress array
   const sorted = [...webSkill].sort((a, b) => b.scale - a.scale);
 
-  // 🔥 FIX: progress array must match sorted list
   const [progressVal, setProgressVal] = useState(Array(sorted.length).fill(0));
 
   useEffect(() => {
@@ -247,12 +245,12 @@ export default function WebExperienceSection() {
       setProgressVal((prev) => {
         let done = true;
 
-        const updated = prev.map((val, i) => {
-          if (val < sorted[i].scale) {
+        const updated = prev.map((v, i) => {
+          if (v < sorted[i].scale) {
             done = false;
-            return val + 1;
+            return v + 1;
           }
-          return val;
+          return v;
         });
 
         if (done) clearInterval(interval);
@@ -261,7 +259,7 @@ export default function WebExperienceSection() {
     }, 15);
 
     return () => clearInterval(interval);
-  }, []); // no dependency so it runs once
+  }, []);
 
   return (
     <div className={styles.progressWrapper}>
@@ -269,12 +267,11 @@ export default function WebExperienceSection() {
         <div key={item.name} className={styles.circle}>
           <div
             className={styles.progress}
-            style={{
-              background: `conic-gradient(
-                rgb(67 54 84) ${(progressVal[index] * 360) / 100}deg,
-                rgb(101 102 103 / 94%) ${(progressVal[index] * 360) / 100}deg
-              )`,
-            }}
+            style={
+              {
+                "--deg": `${(progressVal[index] * 360) / 100}deg`,
+              } as React.CSSProperties
+            }
           >
             <div className={styles.valueContainer}>
               <p>{item.name}</p>
