@@ -247,64 +247,54 @@ export default function WebExperienceSection() {
     Array(sortedSkill.length).fill(0)
   );
 
-  // 🎯 MOBILE-SAFE ANIMATION — requestAnimationFrame
   useEffect(() => {
-    let frameId: number;
-
-    const animate = () => {
+    const interval = setInterval(() => {
       setProgressVal((prev) => {
-        let changed = false;
+        let allDone = true;
 
         const next = prev.map((val, i) => {
           if (val < sortedSkill[i].scale) {
-            changed = true;
+            allDone = false;
             return val + 1;
           }
           return val;
         });
 
-        // continue animation only if needed
-        if (changed) {
-          frameId = requestAnimationFrame(animate);
-        }
+        if (allDone) clearInterval(interval);
 
         return next;
       });
-    };
+    }, 12);
 
-    frameId = requestAnimationFrame(animate);
-
-    return () => cancelAnimationFrame(frameId);
+    return () => clearInterval(interval);
   }, [sortedSkill]);
 
   return (
     <div className={styles.progressWrapper}>
-      {sortedSkill.map((item, index) => (
-        <div key={item.name} className={styles.circle}>
-          <div
-            className={styles.progress}
-            style={{
-              background: `conic-gradient(
+      {sortedSkill.map((item, index) => {
+        /*         const deg = (progressVal[index] * 360) / 100;
+         */
+        return (
+          <div key={item.name} className={styles.circle}>
+            <div
+              className={styles.progress}
+              style={{
+                background: `conic-gradient(
                 rgb(67 54 84) ${(progressVal[index] * 360) / 100}deg,
                 rgb(101 102 103 / 94%) ${(progressVal[index] * 360) / 100}deg
               )`,
-              boxShadow: `
-                0 0 25px rgba(67,54,84,0.9),
-                0 0 30px rgba(101,102,103,0.6),
-                inset 0 0 25px rgba(67,54,84,0.7),
-                inset 0 0 30px rgba(101,102,103,0.6)
-              `,
-              filter: "brightness(1.35) saturate(1.45)",
-              borderRadius: "50%",
-            }}
-          >
-            <div className={styles.valueContainer}>
-              <p>{item.name}</p>
-              <p>{progressVal[index]}%</p>
+                filter: "brightness(1.35) saturate(1.45)",
+                borderRadius: "50%",
+              }}
+            >
+              <div className={styles.valueContainer}>
+                <p>{item.name}</p>
+                <p>{progressVal[index]}%</p>
+              </div>
             </div>
           </div>
-        </div>
-      ))}
+        );
+      })}
     </div>
   );
 }
