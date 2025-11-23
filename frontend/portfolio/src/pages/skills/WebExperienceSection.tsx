@@ -237,10 +237,9 @@ export default function WebExperienceSection() {
   ];
 
   // sort normally (no useMemo)
-  const sortedSkill = [...webSkill].sort((a, b) => b.scale - a.scale);
 
   const [progressVal, setProgressVal] = useState<number[]>(
-    Array(sortedSkill.length).fill(0)
+    Array(webSkill.length).fill(0)
   );
 
   useEffect(() => {
@@ -249,7 +248,7 @@ export default function WebExperienceSection() {
         let allDone = true;
 
         const next = prev.map((val, i) => {
-          if (val < sortedSkill[i].scale) {
+          if (val < webSkill[i].scale) {
             allDone = false;
             return val + 1;
           }
@@ -263,11 +262,11 @@ export default function WebExperienceSection() {
     }, 12);
 
     return () => clearInterval(interval);
-  }, []); // <--- IMPORTANT: no sortedSkill dependency
+  }, []);
 
   return (
     <div className={styles.progressWrapper}>
-      {sortedSkill.map((item, index) => (
+      {webSkill.map((item, index) => (
         <div key={item.name} className={styles.circle}>
           <div
             className={styles.progress}
