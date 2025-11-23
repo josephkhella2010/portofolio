@@ -97,11 +97,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  box-shadow: 0 0 18px rgba(67, 54, 84, 0.75),
-    0 0 22px rgba(101, 102, 103, 0.45), inset 0 0 15px rgba(67, 54, 84, 0.45),
-    inset 0 0 18px rgba(101, 102, 103, 0.35);
-  backdrop-filter: brightness(1.15);
-  -webkit-backdrop-filter: brightness(1.15);
 }
 
 .valueContainer {
