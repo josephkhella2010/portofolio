@@ -208,7 +208,7 @@ export default function WebExperienceSection() {
   );
 } */
 
-import { useEffect, useRef } from "react";
+import { useEffect, useState, useMemo } from "react";
 import styles from "./skill.module.css";
 
 interface WebSkillType {
@@ -236,82 +236,51 @@ export default function WebExperienceSection() {
     { name: "Vue", scale: 65 },
   ];
 
-  const sorted = [...webSkill].sort((a, b) => b.scale - a.scale);
+  // ✅ FIX: sort once only
+  const sorted = useMemo(
+    () => [...webSkill].sort((a, b) => b.scale - a.scale),
+    []
+  );
 
-  const refs = useRef<(SVGCircleElement | null)[]>([]);
-  const percentRefs = useRef<(HTMLParagraphElement | null)[]>([]);
+  const [progressVal, setProgressVal] = useState(Array(sorted.length).fill(0));
 
   useEffect(() => {
-    const radius = 45;
-    const circumference = 2 * Math.PI * radius;
-    const speed = 1;
+    const interval = setInterval(() => {
+      setProgressVal((prev) => {
+        let done = true;
 
-    const current = Array(sorted.length).fill(0);
-    let raf: number;
-
-    const animate = () => {
-      let allDone = true;
-
-      for (let i = 0; i < sorted.length; i++) {
-        if (current[i] < sorted[i].scale) {
-          allDone = false;
-          current[i] = Math.min(sorted[i].scale, current[i] + speed);
-
-          const circle = refs.current[i];
-          const percent = percentRefs.current[i];
-
-          if (circle) {
-            const offset = circumference - (current[i] / 100) * circumference;
-            circle.style.strokeDashoffset = `${offset}`;
+        const updated = prev.map((v, i) => {
+          if (v < sorted[i].scale) {
+            done = false;
+            return v + 1;
           }
+          return v;
+        });
 
-          if (percent) percent.textContent = `${current[i]}%`;
-        }
-      }
+        if (done) clearInterval(interval);
+        return updated;
+      });
+    }, 15);
 
-      if (!allDone) raf = requestAnimationFrame(animate);
-    };
-
-    raf = requestAnimationFrame(animate);
-    return () => cancelAnimationFrame(raf);
+    return () => clearInterval(interval);
   }, [sorted]);
 
   return (
     <div className={styles.progressWrapper}>
-      {sorted.map((item, i) => (
+      {sorted.map((item, index) => (
         <div key={item.name} className={styles.circle}>
-          <div className={styles.progress}>
-            <svg width="120" height="120">
-              <circle
-                cx="60"
-                cy="60"
-                r="45"
-                stroke="rgba(101,102,103,0.4)"
-                strokeWidth="10"
-                fill="none"
-              />
-
-              <circle
-                ref={(el) => (refs.current[i] = el)}
-                cx="60"
-                cy="60"
-                r="45"
-                stroke="rgb(67,54,84)"
-                strokeWidth="10"
-                fill="none"
-                strokeLinecap="round"
-                strokeDasharray={2 * Math.PI * 45}
-                strokeDashoffset={2 * Math.PI * 45}
-                style={{
-                  filter:
-                    "drop-shadow(0 0 10px rgba(67,54,84,0.8)) drop-shadow(0 0 15px rgba(101,102,103,0.7))",
-                }}
-              />
-            </svg>
-
+          <div
+            className={styles.progress}
+            style={{
+              background: `conic-gradient(
+                rgb(67 54 84) ${(progressVal[index] * 360) / 100}deg,
+                rgb(101 102 103 / 94%) ${(progressVal[index] * 360) / 100}deg
+              )`,
+            }}
+          >
             <div className={styles.valueContainer}>
               <p>{item.name}</p>
-              <p ref={(el) => (percentRefs.current[i] = el)}>0%</p>
+              <p>{progressVal[index]}%</p>
             </div>
           </div>
         </div>
