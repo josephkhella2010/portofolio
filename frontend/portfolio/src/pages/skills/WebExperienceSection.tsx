@@ -113,7 +113,7 @@ export default function WebExperienceSection() {
   );
 }
  */
-import { useEffect, useMemo, useState } from "react";
+/* import { useEffect, useMemo, useState } from "react";
 import styles from "./skill.module.css";
 
 interface WebSkillType {
@@ -199,6 +199,64 @@ export default function WebExperienceSection() {
             <div className={styles.valueContainer}>
               <p>{item.name}</p>
               <p>{progressVal[index]}%</p>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+} */
+import { useMemo } from "react";
+import styles from "./skill.module.css";
+
+interface WebSkillType {
+  name: string;
+  scale: number;
+}
+
+export default function WebExperienceSection() {
+  const webSkill: WebSkillType[] = useMemo(
+    () => [
+      { name: "HTML", scale: 100 },
+      { name: "CSS", scale: 95 },
+      { name: "JS", scale: 90 },
+      { name: "TS", scale: 90 },
+      { name: "React", scale: 85 },
+      { name: "Rest Api", scale: 86 },
+      { name: "Sass", scale: 87 },
+      { name: "AWS", scale: 70 },
+      { name: "Nodejs", scale: 75 },
+      { name: "Figma", scale: 72 },
+      { name: "Python", scale: 60 },
+      { name: "NextJs", scale: 65 },
+      { name: "DynamoDB", scale: 65 },
+      { name: "Sqlite", scale: 65 },
+      { name: "Docker", scale: 65 },
+      { name: "Vue", scale: 65 },
+    ],
+    []
+  );
+
+  const sortedSkill = useMemo(
+    () => [...webSkill].sort((a, b) => b.scale - a.scale),
+    [webSkill]
+  );
+
+  return (
+    <div className={styles.progressWrapper}>
+      {sortedSkill.map((item) => (
+        <div key={item.name} className={styles.circle}>
+          <div
+            className={styles.progress}
+            style={
+              {
+                "--deg": `${(item.scale / 100) * 360}deg`,
+              } as any
+            }
+          >
+            <div className={styles.valueContainer}>
+              <p>{item.name}</p>
+              <p>{item.scale}%</p>
             </div>
           </div>
         </div>
