@@ -32,10 +32,33 @@ export default function WebExperienceSection() {
   const [progressVal, setProgressVal] = useState<number[]>(
     Array(webSkill.length).fill(0)
   );
-  const sortSkill = webSkill.sort((a, b) => {
-    return b.scale - a.scale;
-  });
 
+  // Sort skills once (non-mutating)
+  const sortSkill = useMemo(
+    () => [...webSkill].sort((a, b) => b.scale - a.scale),
+    [webSkill]
+  );
+  // Animation effect
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setProgressVal((prev) => {
+        const next = prev.map((val, i) =>
+          val < webSkill[i].scale ? val + 1 : val
+        );
+
+        // Stop interval automatically when done
+        const done = next.every((v, i) => v === webSkill[i].scale);
+        if (done) clearInterval(interval);
+
+        return next;
+      });
+    }, 12);
+
+    return () => clearInterval(interval);
+  }, [webSkill]);
+  /*  const sortSkill = webSkill.sort((a, b) => {
+    return b.scale - a.scale;
+  }); 
   useEffect(() => {
     const interval = setTimeout(() => {
       const upgradeValue = [...progressVal];
@@ -51,7 +74,7 @@ export default function WebExperienceSection() {
 
     return () => clearInterval(interval);
   }, [progressVal, webSkill]);
-
+*/
   return (
     <div className={styles.progressWrapper}>
       {sortSkill.map((item, index) => (
