@@ -113,7 +113,8 @@ export default function WebExperienceSection() {
   );
 }
  */
-/* import { useEffect, useMemo, useState } from "react";
+/*
+ import { useEffect, useMemo, useState } from "react";
 import styles from "./skill.module.css";
 
 interface WebSkillType {
@@ -206,7 +207,7 @@ export default function WebExperienceSection() {
     </div>
   );
 } */
-import { useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import styles from "./skill.module.css";
 
 interface WebSkillType {
@@ -215,6 +216,7 @@ interface WebSkillType {
 }
 
 export default function WebExperienceSection() {
+  // Skill data
   const webSkill: WebSkillType[] = useMemo(
     () => [
       { name: "HTML", scale: 100 },
@@ -237,26 +239,60 @@ export default function WebExperienceSection() {
     []
   );
 
+  // SORT first (VERY IMPORTANT)
   const sortedSkill = useMemo(
     () => [...webSkill].sort((a, b) => b.scale - a.scale),
     [webSkill]
   );
 
+  // progress must MATCH the sorted array
+  const [progressVal, setProgressVal] = useState<number[]>(
+    Array(sortedSkill.length).fill(0)
+  );
+
+  // Animate using sortedSkill, not webSkill
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setProgressVal((prev) => {
+        const next = prev.map((val, i) =>
+          val < sortedSkill[i].scale ? val + 1 : val
+        );
+
+        if (next.every((v, i) => v === sortedSkill[i].scale)) {
+          clearInterval(interval);
+        }
+
+        return next;
+      });
+    }, 12);
+
+    return () => clearInterval(interval);
+  }, [sortedSkill]);
+
   return (
     <div className={styles.progressWrapper}>
-      {sortedSkill.map((item) => (
+      {sortedSkill.map((item, index) => (
         <div key={item.name} className={styles.circle}>
           <div
             className={styles.progress}
-            style={
-              {
-                "--deg": `${(item.scale / 100) * 360}deg`,
-              } as any
-            }
+            style={{
+              background: `conic-gradient(
+                  rgb(67 54 84) ${(progressVal[index] * 360) / 100}deg,
+                  rgb(101 102 103 / 94%) ${(progressVal[index] * 360) / 100}deg
+                )`,
+              boxShadow: `
+                0 0 25px rgba(67,54,84,0.9),
+                0 0 30px rgba(101,102,103,0.6),
+                inset 0 0 25px rgba(67,54,84,0.7),
+                inset 0 0 30px rgba(101,102,103,0.6)
+              `,
+              filter: "brightness(1.35) saturate(1.45)",
+              borderRadius: "50%",
+            }}
           >
             <div className={styles.valueContainer}>
               <p>{item.name}</p>
-              <p>{item.scale}%</p>
+              <p>{progressVal[index]}%</p>
             </div>
           </div>
         </div>
