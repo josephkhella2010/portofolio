@@ -207,7 +207,8 @@ export default function WebExperienceSection() {
     </div>
   );
 } */
-import { useEffect, useMemo, useState } from "react";
+
+import { useEffect, useState } from "react";
 import styles from "./skill.module.css";
 
 interface WebSkillType {
@@ -216,32 +217,27 @@ interface WebSkillType {
 }
 
 export default function WebExperienceSection() {
-  const webSkill: WebSkillType[] = useMemo(
-    () => [
-      { name: "HTML", scale: 100 },
-      { name: "CSS", scale: 95 },
-      { name: "JS", scale: 90 },
-      { name: "TS", scale: 90 },
-      { name: "React", scale: 85 },
-      { name: "Rest Api", scale: 86 },
-      { name: "Sass", scale: 87 },
-      { name: "AWS", scale: 70 },
-      { name: "Nodejs", scale: 75 },
-      { name: "Figma", scale: 72 },
-      { name: "Python", scale: 60 },
-      { name: "NextJs", scale: 65 },
-      { name: "DynamoDB", scale: 65 },
-      { name: "Sqlite", scale: 65 },
-      { name: "Docker", scale: 65 },
-      { name: "Vue", scale: 65 },
-    ],
-    []
-  );
+  const webSkill: WebSkillType[] = [
+    { name: "HTML", scale: 100 },
+    { name: "CSS", scale: 95 },
+    { name: "JS", scale: 90 },
+    { name: "TS", scale: 90 },
+    { name: "React", scale: 85 },
+    { name: "Rest Api", scale: 86 },
+    { name: "Sass", scale: 87 },
+    { name: "AWS", scale: 70 },
+    { name: "Nodejs", scale: 75 },
+    { name: "Figma", scale: 72 },
+    { name: "Python", scale: 60 },
+    { name: "NextJs", scale: 65 },
+    { name: "DynamoDB", scale: 65 },
+    { name: "Sqlite", scale: 65 },
+    { name: "Docker", scale: 65 },
+    { name: "Vue", scale: 65 },
+  ];
 
-  const sortedSkill = useMemo(
-    () => [...webSkill].sort((a, b) => b.scale - a.scale),
-    [webSkill]
-  );
+  // sort normally (no useMemo)
+  const sortedSkill = [...webSkill].sort((a, b) => b.scale - a.scale);
 
   const [progressVal, setProgressVal] = useState<number[]>(
     Array(sortedSkill.length).fill(0)
@@ -267,32 +263,36 @@ export default function WebExperienceSection() {
     }, 12);
 
     return () => clearInterval(interval);
-  }, [sortedSkill]);
+  }, []); // <--- IMPORTANT: no sortedSkill dependency
 
   return (
     <div className={styles.progressWrapper}>
-      {sortedSkill.map((item, index) => {
-        /*         const deg = (progressVal[index] * 360) / 100;
-         */
-        return (
-          <div key={item.name} className={styles.circle}>
-            <div
-              className={styles.progress}
-              style={{
-                background: `conic-gradient(
-                rgb(67 54 84) ${(progressVal[index] * 360) / 100}deg,
-                rgb(101 102 103 / 94%) ${(progressVal[index] * 360) / 100}deg
-              )`,
-              }}
-            >
-              <div className={styles.valueContainer}>
-                <p>{item.name}</p>
-                <p>{progressVal[index]}%</p>
-              </div>
+      {sortedSkill.map((item, index) => (
+        <div key={item.name} className={styles.circle}>
+          <div
+            className={styles.progress}
+            style={{
+              background: `conic-gradient(
+      rgb(67 54 84) ${(progressVal[index] * 360) / 100}deg,
+      rgb(101 102 103 / 94%) ${(progressVal[index] * 360) / 100}deg
+    )`,
+              boxShadow: `
+      0 0 25px rgba(67,54,84,0.9),
+      0 0 30px rgba(101,102,103,0.6),
+      inset 0 0 25px rgba(67,54,84,0.7),
+      inset 0 0 30px rgba(101,102,103,0.6)
+    `,
+              filter: "brightness(1.35) saturate(1.45)",
+              borderRadius: "50%",
+            }}
+          >
+            <div className={styles.valueContainer}>
+              <p>{item.name}</p>
+              <p>{progressVal[index]}%</p>
             </div>
           </div>
-        );
-      })}
+        </div>
+      ))}
     </div>
   );
 }
