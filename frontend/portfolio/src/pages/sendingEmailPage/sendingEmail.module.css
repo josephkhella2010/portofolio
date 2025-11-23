@@ -19,6 +19,7 @@
 .SendingEmailUpperContent {
   font-weight: 600;
   font-size: 36px;
+  text-align: center;
 }
 
 .SendingEmailLowerContent {
@@ -54,5 +55,12 @@
   100% {
     opacity: 0;
     transform: translateX(50px);
+  }
+}
+@media (max-width: 550px) {
+  .SendingEmailUpperContent {
+    font-weight: 600;
+    font-size: 26px;
+    text-align: center;
   }
 }
