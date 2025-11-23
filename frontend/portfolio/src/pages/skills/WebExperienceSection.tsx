@@ -209,12 +209,88 @@ export default function WebExperienceSection() {
 } */
 
 import { useEffect, useState, useMemo } from "react";
-import styles from "./skill.module.css";
+import { createUseStyles } from "react-jss";
 
 interface WebSkillType {
   name: string;
   scale: number;
 }
+
+const useStyles = createUseStyles({
+  progressWrapper: {
+    display: "grid",
+    gridTemplateColumns: "repeat(4, 1fr)",
+    gap: 20,
+    width: "100%",
+    justifyContent: "center",
+    justifyItems: "center",
+    padding: "20px",
+
+    "@media (max-width: 1100px)": {
+      gridTemplateColumns: "repeat(3, 1fr)",
+    },
+
+    "@media (max-width: 850px)": {
+      gridTemplateColumns: "repeat(2, 1fr)",
+    },
+
+    "@media (max-width: 550px)": {
+      gridTemplateColumns: "repeat(1, 1fr)",
+      gap: 30,
+    },
+  },
+
+  circle: {
+    height: 200,
+    width: 200,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: "50%",
+    position: "relative",
+  },
+
+  progress: (data: any) => ({
+    height: "100%",
+    width: "100%",
+    borderRadius: "50%",
+    position: "relative",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+
+    boxShadow:
+      "0 0 25px rgba(67,54,84,0.9), 0 0 30px rgba(101,102,103,0.6), inset 0 0 20px rgba(67,54,84,0.7), inset 0 0 25px rgba(101,102,103,0.6)",
+    filter: "brightness(1.3) saturate(1.3)",
+
+    background: `conic-gradient(
+      rgb(67 54 84) ${data.deg}deg,
+      rgb(101 102 103 / 94%) ${data.deg}deg
+    )`,
+  }),
+
+  inner: {
+    position: "absolute",
+    width: "75%",
+    height: "75%",
+    background: "rgb(114,114,114)",
+    borderRadius: "50%",
+  },
+
+  valueContainer: {
+    position: "absolute",
+    textAlign: "center",
+
+    "& p:nth-child(1)": {
+      fontSize: 18,
+      fontWeight: 600,
+    },
+    "& p:nth-child(2)": {
+      fontSize: 16,
+      marginTop: 5,
+    },
+  },
+});
 
 export default function WebExperienceSection() {
   const webSkill: WebSkillType[] = [
@@ -236,20 +312,19 @@ export default function WebExperienceSection() {
     { name: "Vue", scale: 65 },
   ];
 
-  // ✅ FIX: sort once only
   const sorted = useMemo(
     () => [...webSkill].sort((a, b) => b.scale - a.scale),
     []
   );
 
-  const [progressVal, setProgressVal] = useState(Array(sorted.length).fill(0));
+  const [progressVal, setProgressVal] = useState(sorted.map(() => 0));
 
   useEffect(() => {
     const interval = setInterval(() => {
       setProgressVal((prev) => {
         let done = true;
 
-        const updated = prev.map((v, i) => {
+        const next = prev.map((v, i) => {
           if (v < sorted[i].scale) {
             done = false;
             return v + 1;
@@ -258,33 +333,37 @@ export default function WebExperienceSection() {
         });
 
         if (done) clearInterval(interval);
-        return updated;
+        return next;
       });
     }, 15);
 
     return () => clearInterval(interval);
   }, [sorted]);
 
+  // ❗ Call useStyles only ONCE
+  const classes = useStyles({ deg: 0 });
+
   return (
-    <div className={styles.progressWrapper}>
-      {sorted.map((item, index) => (
-        <div key={item.name} className={styles.circle}>
-          <div
-            className={styles.progress}
-            style={{
-              background: `conic-gradient(
-                rgb(67 54 84) ${(progressVal[index] * 360) / 100}deg,
-                rgb(101 102 103 / 94%) ${(progressVal[index] * 360) / 100}deg
-              )`,
-            }}
-          >
-            <div className={styles.valueContainer}>
-              <p>{item.name}</p>
-              <p>{progressVal[index]}%</p>
+    <div className={classes.progressWrapper}>
+      {sorted.map((item, index) => {
+        const deg = (progressVal[index] * 360) / 100;
+
+        // ❗ Generate dynamic styles
+        const dynamic = useStyles({ deg });
+
+        return (
+          <div key={item.name} className={classes.circle}>
+            <div className={dynamic.progress}>
+              <div className={classes.inner}></div>
+
+              <div className={classes.valueContainer}>
+                <p>{item.name}</p>
+                <p>{progressVal[index]}%</p>
+              </div>
             </div>
           </div>
-        </div>
-      ))}
+        );
+      })}
     </div>
   );
 }
