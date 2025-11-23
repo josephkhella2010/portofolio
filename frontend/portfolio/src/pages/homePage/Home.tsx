@@ -7,7 +7,7 @@ import Testimonial from "../testimonal/Testimonial";
 import DownloadBtn from "../../components/DownloadBtn";
 import FrontendSkillSection from "../skills/FrontendSkillSection";
 import { ToastContainer } from "react-toastify";
-import RunningSkillContainer from "../trackSkillSection/TrackSkillContainer";
+//import RunningSkillContainer from "../trackSkillSection/TrackSkillContainer";
 
 export default function Home() {
   return (
@@ -16,7 +16,8 @@ export default function Home() {
       <AboutUs />
       <DownloadBtn />
       <SkillSection />
-      <RunningSkillContainer />
+      {/*       <RunningSkillContainer />
+       */}{" "}
       <FrontendSkillSection />
       <ProjectSection />
       <Testimonial />
