@@ -37,7 +37,7 @@ export default function AboutUs() {
 
     const timeout = setTimeout(handleTyping, typingSpeed);
 
-    return () => clearTimeout(timeout); // Cleanup timeout
+    return () => clearTimeout(timeout);
   }, [displayedText, isDeleting, currentWordIndex]);
 
   return (
@@ -45,8 +45,7 @@ export default function AboutUs() {
       <div className={styles.AboutUsText}>
         <h1>Joseph Khella</h1>
         <h2>{displayedText}</h2>
-        {/*         <h2>{GetText("home/aboutUs/header")}</h2>
-         */}{" "}
+
         <p>{GetText("home/aboutUs/paragraph")}</p>
       </div>
       <div className={styles.AboutUsimgSection}>

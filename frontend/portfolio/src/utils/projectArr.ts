@@ -15,6 +15,13 @@ export const projectArr = [
     link: "https://klimra.com",
   },
   {
+    name: "Weather App",
+    url: "/foto/weatherApp.png",
+    text: "",
+    title: "Weather App",
+    link: "https://weather-app-frontend-f4hx.onrender.com/",
+  },
+  {
     name: "jul handle",
     url: "/foto/handleProducts.png",
     text: "",
