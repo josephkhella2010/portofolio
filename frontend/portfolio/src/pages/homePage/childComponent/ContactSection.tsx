@@ -237,7 +237,7 @@ export default function ContactSection() {
       dispatch(setIsSending(false));
     }
   }
-
+  /*   */
   return (
     <div className={styles.contactContainer} id="contactMe">
       <div className={styles.contactSection}>
