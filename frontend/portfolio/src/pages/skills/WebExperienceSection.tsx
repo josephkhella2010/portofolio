@@ -296,6 +296,7 @@ export default function WebExperienceSection() {
   const webSkill: WebSkillType[] = [
     { name: "HTML", scale: 100 },
     { name: "CSS", scale: 95 },
+    
     { name: "Sass", scale: 87 },
     { name: "JS", scale: 90 },
     { name: "TS", scale: 90 },
