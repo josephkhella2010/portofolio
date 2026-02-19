@@ -12,6 +12,7 @@ const Languages: string[] = [
   "Node.js",
   "Next.js",
   "Python",
+  "Django",
 ];
 export default function TrackSkillContainer() {
   const loop = [...Languages, ...Languages, ...Languages];
