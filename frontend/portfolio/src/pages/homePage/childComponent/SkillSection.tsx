@@ -37,8 +37,9 @@ export default function SkillSection() {
             <p>{GetText("home/skillSection/paragraphThree")}</p>
             <h3>{GetText("home/skillSection/headerFour")}</h3>
             <p>
-              JavaScript, React, HTML, CSS, SCSS, Next.js, Bootstrap, React,
-              node.js, Python, Flask,,Docker,Prisma,MongoDB,Sqlite.
+              HTML, CSS, SCSS, Bootstrap , JavaScript, TS , Python , React , Vue
+              , node.js, Django , Next.js , CMS Strapi , Flask , MongoDB, SQlite
+              , Docker , Prisma.
             </p>
             <h3>{GetText("home/skillSection/headerFive")}</h3>
             <p>VSCode, Git/GitHub, Figma,Trello</p>

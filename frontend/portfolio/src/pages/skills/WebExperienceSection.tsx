@@ -311,6 +311,7 @@ export default function WebExperienceSection() {
     { name: "Sqlite", scale: 65 },
     { name: "Docker", scale: 65 },
     { name: "Figma", scale: 70 },
+    { name: " MongoDB", scale: 65 },
   ];
 
   const sorted = useMemo(
