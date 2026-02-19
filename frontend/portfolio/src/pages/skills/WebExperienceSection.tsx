@@ -296,25 +296,26 @@ export default function WebExperienceSection() {
   const webSkill: WebSkillType[] = [
     { name: "HTML", scale: 100 },
     { name: "CSS", scale: 95 },
+    { name: "Sass", scale: 87 },
     { name: "JS", scale: 90 },
     { name: "TS", scale: 90 },
-    { name: "React", scale: 85 },
-    { name: "Rest Api", scale: 86 },
-    { name: "Sass", scale: 87 },
-    { name: "AWS", scale: 70 },
-    { name: "Nodejs", scale: 75 },
-    { name: "Figma", scale: 72 },
     { name: "Python", scale: 60 },
     { name: "NextJs", scale: 65 },
+    { name: "React", scale: 85 },
+    { name: "Vue", scale: 65 },
+    { name: "Rest Api", scale: 86 },
+    { name: "Nodejs", scale: 75 },
+    { name: "Django", scale: 65 },
+    { name: "AWS", scale: 70 },
     { name: "DynamoDB", scale: 65 },
     { name: "Sqlite", scale: 65 },
     { name: "Docker", scale: 65 },
-    { name: "Vue", scale: 65 },
+    { name: "Figma", scale: 72 },
   ];
 
   const sorted = useMemo(
     () => [...webSkill].sort((a, b) => b.scale - a.scale),
-    []
+    [],
   );
 
   const [progressVal, setProgressVal] = useState(sorted.map(() => 0));
