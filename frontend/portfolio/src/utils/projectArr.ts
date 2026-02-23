@@ -14,6 +14,15 @@ export const projectArr = [
     title: "Klimra App",
     link: "https://klimra.com",
   },
+
+  {
+    name: "Crud With Login",
+    url: "/foto/todo.png",
+    text: "Crud With Login and Django backend",
+    title: "Crud With Login",
+    link: "https://crud-with-django-ix73.onrender.com/",
+  },
+
   {
     name: "Weather App",
     url: "/foto/weatherApp.png",
