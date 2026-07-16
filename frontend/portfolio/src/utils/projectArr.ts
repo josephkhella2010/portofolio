@@ -1,10 +1,17 @@
 export const projectArr = [
   {
+    name: "Quiz",
+    url: "/foto/quizTwo.png",
+    text: "Quiz With Node.js backend",
+    title: "Crud With Login",
+    link: "https://migrations-samhallet-test.onrender.com/",
+  },
+  {
     name: "Recycle Computer",
     url: "/foto/recycleComputer.png",
     text: "",
     title: "Recycle Computer",
-    link: "https://gmcomputerrecycle.com",
+    link: "https://computerprojectgm.onrender.com/",
   },
 
   {

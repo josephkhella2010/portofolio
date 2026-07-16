@@ -250,7 +250,7 @@ const useStyles = createUseStyles({
     position: "relative",
   },
 
-  progress: (data: any) => ({
+  /*   progress: (data: any) => ({
     height: "100%",
     width: "100%",
     borderRadius: "50%",
@@ -268,7 +268,18 @@ const useStyles = createUseStyles({
       rgb(101 102 103 / 94%) ${data.deg}deg
     )`,
   }),
+ */
+  progress: {
+    height: "100%",
+    width: "100%",
+    borderRadius: "50%",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
 
+    background:
+      "conic-gradient(rgb(67 54 84) calc(var(--deg) * 1deg), rgb(101 102 103 / 94%) 0deg)",
+  },
   inner: {
     position: "absolute",
     width: "75%",
@@ -343,7 +354,8 @@ export default function WebExperienceSection() {
   }, [sorted]);
 
   // ❗ Call useStyles only ONCE
-  const classes = useStyles({ deg: 0 });
+  // const classes = useStyles({ deg: 0 });
+  const classes = useStyles();
 
   return (
     <div className={classes.progressWrapper}>
@@ -351,11 +363,14 @@ export default function WebExperienceSection() {
         const deg = (progressVal[index] * 360) / 100;
 
         // ❗ Generate dynamic styles
-        const dynamic = useStyles({ deg });
+        //const dynamic = useStyles({ deg });
 
         return (
           <div key={item.name} className={classes.circle}>
-            <div className={dynamic.progress}>
+            <div
+              className={classes.progress}
+              style={{ "--deg": deg } as React.CSSProperties}
+            >
               <div className={classes.inner}></div>
 
               <div className={classes.valueContainer}>
