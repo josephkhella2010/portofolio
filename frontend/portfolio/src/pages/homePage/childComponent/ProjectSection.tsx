@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+/* import React, { useEffect, useRef, useState } from "react";
 import styles from "../home.module.css";
 import { FaUpRightFromSquare } from "react-icons/fa6";
 import { projectArr } from "../../../utils/projectArr";
@@ -115,6 +115,137 @@ export default function ProjectSection() {
                 <div className={styles.overlay}>
                   <h4>{title}</h4>
                   <p>{text}</p>
+                  <FaUpRightFromSquare style={{ fill: "black" }} />
+                </div>
+              </a>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+ */
+
+import React, { useEffect, useRef, useState } from "react";
+import styles from "../home.module.css";
+import { FaUpRightFromSquare } from "react-icons/fa6";
+import { projectArr } from "../../../utils/projectArr";
+import { IoIosArrowDropleft, IoIosArrowDropright } from "react-icons/io";
+import { useText } from "../../../utils/translationUtils";
+
+export default function ProjectSection() {
+  const GetText = useText();
+
+  const [currentIndex, setIndex] = useState(0);
+  const itemRef = useRef<HTMLDivElement>(null);
+
+  const [sliderItemsWidth, setSliderItemsWidth] = useState(0);
+
+  const touchStartX = useRef(0);
+  const touchEndX = useRef(0);
+  const isDragging = useRef(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (itemRef.current) {
+        setSliderItemsWidth(itemRef.current.offsetWidth);
+      }
+    };
+
+    handleResize();
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  const maxIndex =
+    window.innerWidth < 500 ? projectArr.length - 1 : projectArr.length - 3;
+
+  const handlePrev = () => {
+    setIndex((prev) => (prev === 0 ? maxIndex : prev - 1));
+  };
+
+  const handleNext = () => {
+    setIndex((prev) => (prev === maxIndex ? 0 : prev + 1));
+  };
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.touches[0].clientX;
+    touchEndX.current = touchStartX.current;
+    isDragging.current = false;
+  };
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    touchEndX.current = e.touches[0].clientX;
+
+    if (Math.abs(touchEndX.current - touchStartX.current) > 10) {
+      isDragging.current = true;
+    }
+  };
+
+  const handleTouchEnd = () => {
+    if (!isDragging.current) return;
+
+    const deltaX = touchEndX.current - touchStartX.current;
+
+    if (deltaX > 50) {
+      handlePrev();
+    } else if (deltaX < -50) {
+      handleNext();
+    }
+  };
+
+  return (
+    <div className={styles.projectContainer} id="project">
+      <h2>{GetText("home/ProjectSection/header")}</h2>
+
+      <div className={styles.btnContainerSlider}>
+        <button onClick={handlePrev}>
+          <IoIosArrowDropleft style={{ fill: "white" }} />
+        </button>
+
+        <button onClick={handleNext}>
+          <IoIosArrowDropright style={{ fill: "white" }} />
+        </button>
+      </div>
+
+      <div
+        className={styles.projectSection}
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
+        style={{ overflow: "hidden" }}
+      >
+        {projectArr.map((item, i) => {
+          const { title, url, name, text, link } = item;
+
+          return (
+            <div
+              key={i}
+              ref={i === 0 ? itemRef : null}
+              className={styles.cardContent}
+              style={{
+                transform: `translateX(-${
+                  currentIndex * (sliderItemsWidth + 20)
+                }px)`,
+                transition: "transform 0.5s ease",
+              }}
+            >
+              <img src={url} alt={name} />
+
+              <a
+                href={link}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ textAlign: "center" }}
+              >
+                <div className={styles.overlay} style={{ padding: "15px" }}>
+                  <h4 style={{ textAlign: "center" }}>{title}</h4>
+                  <p style={{ textAlign: "center" }}>{text}</p>
                   <FaUpRightFromSquare style={{ fill: "black" }} />
                 </div>
               </a>
