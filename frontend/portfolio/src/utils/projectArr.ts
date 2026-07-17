@@ -3,7 +3,7 @@ export const projectArr = [
     name: "Quiz",
     url: "/foto/quizTwo.png",
     text: "Quiz With Node.js backend",
-    title: "Crud With Login",
+    title:"Quiz Project",
     link: "https://migrations-samhallet-test.onrender.com/",
   },
   {
