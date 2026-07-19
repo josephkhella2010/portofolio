@@ -19,7 +19,7 @@ router.post("/", async (req, res) => {
     await apiInstance.sendTransacEmail({
       sender: {
         name: "Portfolio Website",
-        email: "josephkhella2030@gmail.com", // your Brevo verified sender
+        email: "josephkhella2030@gmail.com",
       },
       to: [{ email: process.env.USER_EMAIL }],
       replyTo: { email },
