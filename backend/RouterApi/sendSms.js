@@ -2,7 +2,6 @@ const express = require("express");
 const router = express.Router();
 const SibApiV3Sdk = require("sib-api-v3-sdk");
 
-// Brevo configuration
 SibApiV3Sdk.ApiClient.instance.authentications["api-key"].apiKey =
   process.env.BREVO_API_KEY;
 
