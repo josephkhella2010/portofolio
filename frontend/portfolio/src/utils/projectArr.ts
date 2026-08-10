@@ -1,9 +1,16 @@
 export const projectArr = [
   {
+    name: "Mini Chat AI",
+    url: "/foto/chatAi.png",
+    text: "Mini Chat AI with Login Logic Node.js backend",
+    title: "Mini Chat AI Project",
+    link: "https://social-science-social.netlify.app/",
+  },
+  {
     name: "Quiz",
     url: "/foto/quizTwo.png",
     text: "Quiz With Node.js backend",
-    title:"Quiz Project",
+    title: "Quiz Project",
     link: "https://migrations-samhallet-test.onrender.com/",
   },
   {
