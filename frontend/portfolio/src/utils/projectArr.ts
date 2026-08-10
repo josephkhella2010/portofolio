@@ -4,7 +4,7 @@ export const projectArr = [
     url: "/foto/chatAi.png",
     text: "Mini Chat AI with Login Logic Node.js backend",
     title: "Mini Chat AI Project",
-    link: "https://social-science-social.netlify.app/",
+    link: "https://app-project-chat.netlify.app/",
   },
   {
     name: "Quiz",
