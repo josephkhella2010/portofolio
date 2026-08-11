@@ -8,7 +8,7 @@ import { useText } from "../../utils/translationUtils";
 export default function FrontendSkillSection() {
   const [showList, setShowList] = useState<boolean>(false);
   const GetText = useText();
-
+  // return
   return (
     <div className={styles.mainContainer} id="itSkill">
       <div className={styles.header}>
