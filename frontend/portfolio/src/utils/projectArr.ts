@@ -7,6 +7,14 @@ export const projectArr = [
     link: "https://app-project-chat.netlify.app/",
   },
   {
+    name: "Pokemon Game",
+    url: "/foto/pokémonGame.png",
+    text: "Simple Pokémon Game Node.js backend",
+    title: "Pokémon Game",
+    link: "https://pokemon-game-462k.onrender.com/",
+  },
+
+  {
     name: "Quiz",
     url: "/foto/quizTwo.png",
     text: "Quiz With Node.js backend",
